@@ -23,7 +23,7 @@ Make sure to add your own `MONGOURI` from your [mLab](http://mlab.com) database 
 ```javascript
 module.exports = {
   mongoURI: "YOUR_MONGO_URI_HERE",
-  secretOrKey: "secret"
+  secretOrKey: "secret",
 };
 ```
 
@@ -36,7 +36,7 @@ npm install && npm run client-install
 // Run client & server with concurrently
 npm run dev
 
-// Server runs on http://localhost:5000 and client on http://localhost:3000
+// Server runs on http://localhost:5003 and client on http://localhost:3000
 ```
 
 For deploying to Heroku, please refer to [this](https://www.youtube.com/watch?v=71wSzpLyW9k) helpful video by TraversyMedia.

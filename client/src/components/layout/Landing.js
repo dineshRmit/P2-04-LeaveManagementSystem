@@ -9,7 +9,7 @@ class Landing extends Component {
           <div className="col s12 center-align">
             <h4>Welcome to Leave Manager</h4>
             <br />
-            <div className="col s6">
+            {/* <div className="col s6">
               <Link
                 to="/register"
                 style={{
@@ -21,8 +21,8 @@ class Landing extends Component {
               >
                 Register
               </Link>
-            </div>
-            <div className="col s6">
+            </div> */}
+            <div className="mx-auto">
               <Link
                 to="/login"
                 style={{
@@ -30,7 +30,7 @@ class Landing extends Component {
                   borderRadius: "3px",
                   letterSpacing: "1.5px",
                 }}
-                className="btn btn-large btn-flat waves-effect white black-text"
+                className="btn btn-large waves-effect waves-light hoverable blue accent-3"
               >
                 Log In
               </Link>

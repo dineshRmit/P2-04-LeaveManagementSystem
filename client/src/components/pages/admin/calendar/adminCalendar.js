@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import { withRouter } from "react-router";
 
 class AdminCalendar extends Component {

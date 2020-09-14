@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import styled from "styled-components";
 import { connect as connectRedux } from "react-redux";
 import { Layout, Menu, Button } from "antd";
@@ -15,6 +14,7 @@ import {
 } from "@ant-design/icons";
 
 import { setCurrentUser, logoutUser } from "./actions/authActions";
+import { BrowserRouter as Router, Route, Switch, withRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./store";
 
@@ -28,6 +28,10 @@ import Dashboard from "./components/dashboard/Dashboard";
 
 import "./App.css";
 import { connect } from "mongoose";
+import AdminAccounts from "./components/pages/admin/accounts/adminAccounts";
+import AdminOverview from "./components/pages/admin/overview/adminOverview";
+import AdminLeaves from "./components/pages/admin/leaves/adminLeaves";
+import AdminCalendar from "./components/pages/admin/calendar/adminCalendar";
 
 const { Header, Sider, Content, Footer } = Layout;
 
@@ -62,7 +66,11 @@ class App extends Component {
   };
 
   onLogoutClick = () => {
-    this.props.logoutUser();
+    // Logout user
+    store.dispatch(logoutUser());
+
+    // Redirect to login
+    window.location.href = "../";
   };
 
   render() {
@@ -91,8 +99,10 @@ class App extends Component {
                 <Route exact path="/login" component={Login} />
                 <Switch>
                   <PrivateRoute exact path="/dashboard" component={Dashboard} />
-                  {/* <PrivateRoute exact path="/adminHome" component={AdminHome} /> */}
-                  {/* <PrivateRoute exact path="/adminHome/Accounts" component={AdminAccounts} /> */}
+                  <PrivateRoute exact path="/admin/dashboard" component={AdminOverview} />
+                  <PrivateRoute exact path="/admin/accounts" component={AdminAccounts} />
+                  <PrivateRoute exact path="/admin/leaves" component={AdminLeaves} />
+                  <PrivateRoute exact path="/admin/calendar" component={AdminCalendar} />
                 </Switch>
               </Content>
               <StyledFooter className="layout-footer">SEPM - Group P2-04 </StyledFooter>

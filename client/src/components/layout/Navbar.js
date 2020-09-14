@@ -20,6 +20,7 @@ import "antd/dist/antd.css"; // or 'antd/dist/antd.less'
 import "./navbar.css";
 
 const { Header, Sider, Content } = Layout;
+const lastPath = window.location.pathname;
 
 class Navbar extends Component {
   componentDidMount = () => {};
@@ -34,20 +35,22 @@ class Navbar extends Component {
       //   <StyledLayout>
       <Sider trigger={null} collapsible collapsed={this.props.collapsed}>
         <div className="logo" />
-        <Menu theme="dark" mode="inline" onSelect={this.handleMenuClick}>
-          <Menu.Item key="1" icon={<DashboardOutlined />}>
+        <Menu theme="dark" mode="inline" onSelect={this.handleMenuClick} defaultSelectedKeys={[lastPath]}>
+          <Menu.Item key="/admin/dashboard" icon={<DashboardOutlined />}>
             Dashboard
-            <Link to="/adminHome/Overview"></Link>
+            <Link to="/admin/dashboard"></Link>
           </Menu.Item>
-          <Menu.Item key="2" icon={<UserOutlined />}>
+          <Menu.Item key="/admin/accounts" icon={<UserOutlined />}>
             Accounts
-            <Link to="/adminHome/Accounts"></Link>
+            <Link to="/admin/accounts"></Link>
           </Menu.Item>
-          <Menu.Item key="3" icon={<HomeOutlined />}>
+          <Menu.Item key="/admin/leaves" icon={<HomeOutlined />}>
             Leaves
+            <Link to="/admin/leaves"></Link>
           </Menu.Item>
-          <Menu.Item key="4" icon={<CalendarOutlined />}>
+          <Menu.Item key="/admin/calendar" icon={<CalendarOutlined />}>
             Calendar
+            <Link to="/admin/calendar"></Link>
           </Menu.Item>
         </Menu>
       </Sider>

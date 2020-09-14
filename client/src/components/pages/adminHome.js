@@ -75,7 +75,7 @@ class AdminHome extends Component {
                 </Button>
               </LogoutDiv>
             </StyledHeader>
-            <Content
+            {/* <Content
               className="site-layout-background"
               style={{
                 margin: "24px 16px",
@@ -84,10 +84,10 @@ class AdminHome extends Component {
               }}
             >
               <Switch>
-                {/* <Route path="/adminHome/Overview" component={AdminOverview} /> */}
+                <Route path="/adminHome/Overview" component={AdminOverview} />
                 <Route path="/adminHome/Accounts" exact component={AdminAccounts} />
               </Switch>
-            </Content>
+            </Content> */}
           </Layout>
         </StyledLayout>
       </Router>

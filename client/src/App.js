@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import { connect as connectRedux } from "react-redux";
+import { connect } from "react-redux";
 import { Layout, Menu, Button } from "antd";
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
@@ -27,7 +27,6 @@ import PrivateRoute from "./components/private-route/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
 
 import "./App.css";
-import { connect } from "mongoose";
 import AdminAccounts from "./components/pages/admin/accounts/adminAccounts";
 import AdminOverview from "./components/pages/admin/overview/adminOverview";
 import AdminLeaves from "./components/pages/admin/leaves/adminLeaves";
@@ -79,6 +78,7 @@ class App extends Component {
         <Router>
           <StyledLayout>
             {/* <div className="App"> */}
+
             <Navbar collapsed={this.state.collapsed} />
             <Layout>
               <StyledHeader>
@@ -144,5 +144,9 @@ const LogoutDiv = styled.div`
   justify-content: space-between;
   align: right;
 `;
+
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
 
 export default App;

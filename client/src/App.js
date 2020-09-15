@@ -1,20 +1,13 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import { Layout, Menu, Button } from "antd";
+import { Layout, Button } from "antd";
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
-import {
-  DashboardOutlined,
-  MenuUnfoldOutlined,
-  MenuFoldOutlined,
-  UserOutlined,
-  HomeOutlined,
-  CalendarOutlined,
-} from "@ant-design/icons";
+import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
 
 import { setCurrentUser, logoutUser } from "./actions/authActions";
-import { BrowserRouter as Router, Route, Switch, withRouter } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./store";
 
@@ -149,4 +142,4 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 
-export default App;
+export default connect(mapStateToProps)(App);

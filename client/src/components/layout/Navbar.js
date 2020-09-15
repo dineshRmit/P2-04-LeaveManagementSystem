@@ -54,33 +54,6 @@ class Navbar extends Component {
   }
 }
 
-const StyledLayout = styled(Layout)`
-  height: 100vh;
-`;
-
-const LogoutDiv = styled.div`
-  justify-content: space-between;
-  align: right;
-`;
-
-const StyledHeader = styled(Header)`
-  padding: 0;
-  padding-right: 1em;
-  display: flex;
-  background: #fff;
-  justify-content: space-between;
-`;
-
-const GroupName = styled.div`
-  fontcolor: black;
-  font-size: 2em;
-`;
-
-const AppName = styled.div`
-  font-size: 2em;
-  font-family: auto;
-`;
-
 const mapStateToProps = (state) => ({
   auth: state.auth,
 });

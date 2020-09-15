@@ -11,7 +11,7 @@ class Dashboard extends Component {
   // };
 
   onDashboardClick = () => {
-    this.props.history.push("/adminHome/Accounts");
+    this.props.history.push("/admin/dashboard");
   };
   render() {
     const { user } = this.props.auth;
@@ -23,7 +23,7 @@ class Dashboard extends Component {
             <h4>
               <b>Hey there,</b> {user.name.split(" ")[0]}
               <p className="flow-text grey-text text-darken-1">
-                You are logged into a full-stack <span style={{ fontFamily: "monospace" }}>MERN</span> app 👏
+                You are logged in as <span style={{ fontFamily: "monospace" }}>ADMIN</span> 👏
               </p>
             </h4>
             {/* <button
@@ -39,7 +39,7 @@ class Dashboard extends Component {
               Logout
             </button> */}
 
-            <button
+            {/* <button
               style={{
                 width: "auto",
                 borderRadius: "3px",
@@ -50,7 +50,7 @@ class Dashboard extends Component {
               className="btn btn-large waves-effect waves-light hoverable blue accent-3"
             >
               Go to dashboard
-            </button>
+            </button> */}
           </div>
         </div>
       </div>

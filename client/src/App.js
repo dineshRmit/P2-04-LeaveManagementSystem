@@ -33,9 +33,7 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <Router>
-          <Routes />
-        </Router>
+        <Routes />
       </Provider>
     );
   }

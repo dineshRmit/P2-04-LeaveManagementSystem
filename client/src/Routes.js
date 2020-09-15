@@ -45,45 +45,47 @@ class Routes extends Component {
 
   render() {
     return (
-      <StyledLayout>
-        <Navbar collapsed={this.state.collapsed} />
-        <Layout>
-          <StyledHeader>
-            {this.props.auth.isAuthenticated ? (
-              React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
-                className: "trigger",
-                onClick: this.toggle,
-              })
-            ) : (
-              <div />
-            )}
+      <Router>
+        <StyledLayout>
+          <Navbar collapsed={this.state.collapsed} />
+          <Layout>
+            <StyledHeader>
+              {this.props.auth.isAuthenticated ? (
+                React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
+                  className: "trigger",
+                  onClick: this.toggle,
+                })
+              ) : (
+                <div />
+              )}
 
-            <AppName>Leave Manager</AppName>
-            {this.props.auth.isAuthenticated ? (
-              <LogoutDiv>
-                <Button type="primary" danger onClick={() => this.onLogoutClick()}>
-                  Logout
-                </Button>
-              </LogoutDiv>
-            ) : (
-              <div />
-            )}
-          </StyledHeader>
-          <Content>
-            <Route exact path="/" component={Landing} />
-            <Route exact path="/register" component={Register} />
-            <Route exact path="/login" component={Login} />
-            <Switch>
-              <PrivateRoute exact path="/dashboard" component={Dashboard} />
-              <PrivateRoute exact path="/admin/dashboard" component={AdminOverview} />
-              <PrivateRoute exact path="/admin/accounts" component={AdminAccounts} />
-              <PrivateRoute exact path="/admin/leaves" component={AdminLeaves} />
-              <PrivateRoute exact path="/admin/calendar" component={AdminCalendar} />
-            </Switch>
-          </Content>
-          <StyledFooter className="layout-footer">SEPM - Group P2-04 </StyledFooter>
-        </Layout>
-      </StyledLayout>
+              <AppName>Leave Manager</AppName>
+              {this.props.auth.isAuthenticated ? (
+                <LogoutDiv>
+                  <Button type="primary" danger onClick={() => this.onLogoutClick()}>
+                    Logout
+                  </Button>
+                </LogoutDiv>
+              ) : (
+                <div />
+              )}
+            </StyledHeader>
+            <Content>
+              <Route exact path="/" component={Landing} />
+              <Route exact path="/register" component={Register} />
+              <Route exact path="/login" component={Login} />
+              <Switch>
+                <PrivateRoute exact path="/dashboard" component={Dashboard} />
+                <PrivateRoute exact path="/admin/dashboard" component={AdminOverview} />
+                <PrivateRoute exact path="/admin/accounts" component={AdminAccounts} />
+                <PrivateRoute exact path="/admin/leaves" component={AdminLeaves} />
+                <PrivateRoute exact path="/admin/calendar" component={AdminCalendar} />
+              </Switch>
+            </Content>
+            <StyledFooter className="layout-footer">SEPM - Group P2-04 </StyledFooter>
+          </Layout>
+        </StyledLayout>
+      </Router>
     );
   }
 }

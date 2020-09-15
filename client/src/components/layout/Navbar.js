@@ -27,7 +27,7 @@ class Navbar extends Component {
         {this.props.auth.isAuthenticated ? (
           <Sider trigger={null} collapsible collapsed={this.props.collapsed}>
             <div className="logo" />
-            <Menu theme="dark" mode="inline" onSelect={this.handleMenuClick} defaultSelectedKeys={[lastPath]}>
+            <Menu theme="dark" mode="inline" onSelect={this.handleMenuClick} defaultSelectedKeys={["/admin/dashboard"]}>
               <Menu.Item key="/admin/dashboard" icon={<DashboardOutlined />}>
                 Dashboard
                 <Link to="/admin/dashboard"></Link>

@@ -7,6 +7,7 @@ import { DashboardOutlined, UserOutlined, HomeOutlined, CalendarOutlined } from 
 import "antd/dist/antd.css"; // or 'antd/dist/antd.less'
 import "./navbar.css";
 
+const { SubMenu } = Menu;
 const { Header, Sider } = Layout;
 const lastPath = window.location.pathname;
 
@@ -27,15 +28,18 @@ class Navbar extends Component {
         {this.props.auth.isAuthenticated ? (
           <Sider trigger={null} collapsible collapsed={this.props.collapsed}>
             <div className="logo" />
-            <Menu theme="dark" mode="inline" onSelect={this.handleMenuClick} defaultSelectedKeys={["/admin/dashboard"]}>
+            <Menu theme="dark" mode="inline" onSelect={this.handleMenuClick} defaultSelectedKeys={[lastPath]}>
               <Menu.Item key="/admin/dashboard" icon={<DashboardOutlined />}>
                 Dashboard
                 <Link to="/admin/dashboard"></Link>
               </Menu.Item>
-              <Menu.Item key="/admin/accounts" icon={<UserOutlined />}>
-                Accounts
-                <Link to="/admin/accounts"></Link>
-              </Menu.Item>
+              <SubMenu icon={<UserOutlined />} title="Accounts">
+                <Menu.Item key="/admin/accounts/createAccount">
+                  Create Account
+                  <Link to="/admin/accounts/createAccount"></Link>
+                </Menu.Item>
+              </SubMenu>
+
               <Menu.Item key="/admin/leaves" icon={<HomeOutlined />}>
                 Leaves
                 <Link to="/admin/leaves"></Link>

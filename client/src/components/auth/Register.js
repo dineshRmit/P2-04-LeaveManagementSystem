@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { registerUser } from "../../actions/authActions";
 import classnames from "classnames";
+import "./register.css";
 
 class Register extends Component {
   constructor() {
@@ -19,9 +20,9 @@ class Register extends Component {
 
   componentDidMount() {
     // If logged in and user navigates to Register page, should redirect them to dashboard
-    if (this.props.auth.isAuthenticated) {
-      this.props.history.push("/dashboard");
-    }
+    // if (this.props.auth.isAuthenticated) {
+    //   this.props.history.push("/dashboard");
+    // }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -53,19 +54,13 @@ class Register extends Component {
     const { errors } = this.state;
 
     return (
-      <div className="container">
+      <div className="container" style={{ marginLeft: "0", minWidth: "10em" }}>
         <div className="row">
-          <div className="col s8 offset-s2">
-            <Link to="/" className="btn-flat waves-effect">
-              <i className="material-icons left">keyboard_backspace</i> Back to home
-            </Link>
-            <div className="col s12" style={{ paddingLeft: "11.250px" }}>
+          <div className="col s6">
+            <div className="col s12">
               <h4>
-                <b>Register</b> below
+                <b>Create</b> account
               </h4>
-              <p className="grey-text text-darken-1">
-                Already have an account? <Link to="/login">Log in</Link>
-              </p>
             </div>
             <form noValidate onSubmit={this.onSubmit}>
               <div className="input-field col s12">
@@ -124,20 +119,48 @@ class Register extends Component {
                 <label htmlFor="password2">Confirm Password</label>
                 <span className="red-text">{errors.password2}</span>
               </div>
-              <div className="col s12" style={{ paddingLeft: "11.250px" }}>
+
+              <div class="input-field col s12">
+                <select>
+                  <optgroup label="team 1">
+                    <option value="1">Option 1</option>
+                    <option value="2">Option 2</option>
+                  </optgroup>
+                  <optgroup label="team 2">
+                    <option value="3">Option 3</option>
+                    <option value="4">Option 4</option>
+                  </optgroup>
+                </select>
+                <label>Optgroups</label>
+              </div>
+
+              <div class="input-field col s12">
+                <select>
+                  <option value="" disabled selected>
+                    Choose your option
+                  </option>
+                  <option value="1">Option 1</option>
+                  <option value="2">Option 2</option>
+                  <option value="3">Option 3</option>
+                </select>
+                <label>Materialize Select</label>
+              </div>
+
+              {/* <div className="col s12" style={{ paddingLeft: "11.250px" }}>
                 <button
                   style={{
                     width: "150px",
                     borderRadius: "3px",
                     letterSpacing: "1.5px",
                     marginTop: "1rem",
+                    backgroundColor: "#1890ff",
                   }}
                   type="submit"
-                  className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+                  className="btn btn-large waves-effect waves-light hoverable"
                 >
                   Sign up
                 </button>
-              </div>
+              </div> */}
             </form>
           </div>
         </div>

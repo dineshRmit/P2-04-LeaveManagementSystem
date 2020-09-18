@@ -25,6 +25,7 @@
     "validator": "^10.9.0"
   },
   "devDependencies": {
+    "antd-form-builder": "^2.1.1",
     "nodemon": "^2.0.4"
   }
 }

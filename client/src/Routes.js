@@ -17,7 +17,7 @@ import PrivateRoute from "./components/private-route/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
 
 import "./App.css";
-import AdminAccounts from "./components/pages/admin/accounts/adminAccounts";
+import CreateAccount from "./components/pages/admin/accounts/createAccounts/createAccounts";
 import AdminOverview from "./components/pages/admin/overview/adminOverview";
 import AdminLeaves from "./components/pages/admin/leaves/adminLeaves";
 import AdminCalendar from "./components/pages/admin/calendar/adminCalendar";
@@ -39,8 +39,10 @@ class Routes extends Component {
     // Logout user
     store.dispatch(logoutUser());
 
-    // Redirect to login
-    window.location.href = "../";
+    // setTimeout(() => {
+    //   // Redirect to login
+    //   window.location.href = "../";
+    // }, 1000);
   };
 
   render() {
@@ -59,7 +61,9 @@ class Routes extends Component {
                 <div />
               )}
 
-              <AppName>Leave Manager</AppName>
+              <AppName>
+                <b>Leave Manager</b>
+              </AppName>
               {this.props.auth.isAuthenticated ? (
                 <LogoutDiv>
                   <Button type="primary" danger onClick={() => this.onLogoutClick()}>
@@ -77,7 +81,7 @@ class Routes extends Component {
               <Switch>
                 <PrivateRoute exact path="/dashboard" component={Dashboard} />
                 <PrivateRoute exact path="/admin/dashboard" component={AdminOverview} />
-                <PrivateRoute exact path="/admin/accounts" component={AdminAccounts} />
+                <PrivateRoute exact path="/admin/accounts/createAccount" component={CreateAccount} />
                 <PrivateRoute exact path="/admin/leaves" component={AdminLeaves} />
                 <PrivateRoute exact path="/admin/calendar" component={AdminCalendar} />
               </Switch>
@@ -112,8 +116,7 @@ const StyledFooter = styled(Footer)`
 `;
 
 const AppName = styled.div`
-  font-size: 2em;
-  font-family: auto;
+  font-size: 1.7em;
 `;
 
 const LogoutDiv = styled.div`

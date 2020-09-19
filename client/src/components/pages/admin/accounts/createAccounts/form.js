@@ -16,14 +16,34 @@ const Demo = (props) => {
   // const [userType, setUserType] = useState([]);
 
   const onFinish = (values) => {
+    let firstAccountType, secondAccountType, thirdAccountType;
     console.log("Success:", values);
+
+    if (values.accountType.length == 1) {
+      console.log("length is 1");
+      firstAccountType = values.accountType[0];
+      secondAccountType = "none";
+      thirdAccountType = "none";
+    } else if (values.accountType.length == 2) {
+      console.log("length is 2");
+      firstAccountType = values.accountType[0];
+      secondAccountType = values.accountType[1];
+      thirdAccountType = "none";
+    } else {
+      console.log("length is 3");
+      firstAccountType = values.accountType[0];
+      secondAccountType = values.accountType[1];
+      thirdAccountType = values.accountType[2];
+    }
 
     const newUser = {
       name: values.user.name,
       email: values.user.email,
       password: values.password,
       password2: values.password,
-      accountType: values.accountType,
+      userType1: firstAccountType,
+      userType2: secondAccountType,
+      userType3: thirdAccountType,
     };
 
     onSubmit(newUser);

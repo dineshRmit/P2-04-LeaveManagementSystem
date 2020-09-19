@@ -16,9 +16,6 @@ const User = require("../../models/User");
 // @desc Register user
 // @access Public
 router.post("/register", (req, res) => {
-  // Form validation
-  console.log("Prinitng " + req);
-
   const { errors, isValid } = validateRegisterInput(req.body);
 
   // Check validation
@@ -34,7 +31,9 @@ router.post("/register", (req, res) => {
         name: req.body.name,
         email: req.body.email,
         password: req.body.password,
-        userType: req.body.userType,
+        userType1: req.body.userType1,
+        userType2: req.body.userType2,
+        userType3: req.body.userType3,
       });
 
       // Hash password before saving in database

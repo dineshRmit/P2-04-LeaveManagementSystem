@@ -23,6 +23,15 @@ import AdminOverview from "./components/pages/admin/overview/adminOverview";
 import AdminLeaves from "./components/pages/admin/leaves/adminLeaves";
 import AdminCalendar from "./components/pages/admin/calendar/adminCalendar";
 
+import StaffDashboard from "./components/pages/staff/dashboard/staffDashboard";
+import StaffLeaveBalance from "./components/pages/staff/leaves/staffLeaveBalance";
+import StaffApplyLeave from "./components/pages/staff/leaves/staffApplyLeave";
+
+import ManagerDashboard from "./components/pages/manager/dashboard/managerDashboard";
+import ManagerApplyLeave from "./components/pages/manager/leaves/managerApplyLeave";
+import ManagerLeaveBalance from "./components/pages/manager/leaves/managerLeaveBalance";
+import ManagerManageLeave from "./components/pages/manager/leaves/managerManageLeaves";
+
 const { Header, Sider, Content, Footer } = Layout;
 
 class Routes extends Component {
@@ -80,12 +89,21 @@ class Routes extends Component {
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
               <Switch>
-                <PrivateRoute exact path="/dashboard" component={Dashboard} />
+                {/* Admin routes */}
                 <PrivateRoute exact path="/admin/dashboard" component={AdminOverview} />
                 <PrivateRoute exact path="/admin/accounts/createAccount" component={CreateAccount} />
                 <PrivateRoute exact path="/admin/accounts/deactivateAccount" component={DeactivateAccount} />
                 <PrivateRoute exact path="/admin/leaves" component={AdminLeaves} />
                 <PrivateRoute exact path="/admin/calendar" component={AdminCalendar} />
+
+                {/* Staff routes */}
+                <PrivateRoute exact path="/staff/dashboard" component={StaffDashboard} />
+                <PrivateRoute exact path="/staff/leaves/leaveBalance" component={StaffLeaveBalance} />
+                <PrivateRoute exact path="/staff/leaves/applyLeave" component={StaffApplyLeave} />
+
+                {/* Manager routes */}
+                <PrivateRoute exact path="/manager/dashboard" component={ManagerDashboard} />
+                <PrivateRoute exact path="/manager/leaves/applyLeave" component={ManagerApplyLeave} />
               </Switch>
             </Content>
             <StyledFooter className="layout-footer">SEPM - Group P2-04 </StyledFooter>

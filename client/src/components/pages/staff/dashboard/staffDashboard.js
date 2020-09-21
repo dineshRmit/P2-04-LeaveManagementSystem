@@ -12,11 +12,11 @@ class StaffDashboard extends Component {
     return (
       <StyledLayout>
         <StyledBreadcrum>
-          <Breadcrumb.Item>Admin</Breadcrumb.Item>
+          <Breadcrumb.Item>Staff</Breadcrumb.Item>
           <Breadcrumb.Item>Dashboard</Breadcrumb.Item>
         </StyledBreadcrum>
         <StyledContent>
-          You are logged in as <span style={{ fontFamily: "monospace" }}>ADMIN</span> 👏
+          You are logged in as <span style={{ fontFamily: "monospace" }}>STAFF</span> 👏
         </StyledContent>
       </StyledLayout>
     );

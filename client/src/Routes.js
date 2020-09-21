@@ -18,6 +18,7 @@ import Dashboard from "./components/dashboard/Dashboard";
 
 import "./App.css";
 import CreateAccount from "./components/pages/admin/accounts/createAccounts/createAccounts";
+import DeactivateAccount from "./components/pages/admin/accounts/deactivateAccounts/deactivateAccounts";
 import AdminOverview from "./components/pages/admin/overview/adminOverview";
 import AdminLeaves from "./components/pages/admin/leaves/adminLeaves";
 import AdminCalendar from "./components/pages/admin/calendar/adminCalendar";
@@ -82,6 +83,7 @@ class Routes extends Component {
                 <PrivateRoute exact path="/dashboard" component={Dashboard} />
                 <PrivateRoute exact path="/admin/dashboard" component={AdminOverview} />
                 <PrivateRoute exact path="/admin/accounts/createAccount" component={CreateAccount} />
+                <PrivateRoute exact path="/admin/accounts/deactivateAccount" component={DeactivateAccount} />
                 <PrivateRoute exact path="/admin/leaves" component={AdminLeaves} />
                 <PrivateRoute exact path="/admin/calendar" component={AdminCalendar} />
               </Switch>

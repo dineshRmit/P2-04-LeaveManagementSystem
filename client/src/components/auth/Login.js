@@ -1,24 +1,18 @@
 import React, { Component } from "react";
-import { Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import { Layout } from "antd";
 import { Button } from "antd";
-import { Row, Col } from "antd";
 import { loginUser } from "../../actions/authActions";
-import { Form, Input, Checkbox } from "antd";
+import { Form, Input } from "antd";
 
 const { Content } = Layout;
 
 class Login extends Component {
   constructor() {
     super();
-    this.state = {
-      email: "",
-      password: "",
-      errors: {},
-    };
   }
 
   componentDidMount() {
@@ -40,28 +34,16 @@ class Login extends Component {
     }
   }
 
-  onChange = (e) => {
-    this.setState({ [e.target.id]: e.target.value });
-  };
-
-  onSubmit = (e) => {
-    e.preventDefault();
-
+  onSubmit = (data) => {
     const userData = {
-      email: this.state.email,
-      password: this.state.password,
+      email: data.username,
+      password: data.password,
     };
 
     this.props.loginUser(userData);
   };
 
   render() {
-    const { errors } = this.state;
-
-    const onFinish = (values) => {
-      console.log("Success:", values);
-    };
-
     return (
       <StyledLayout>
         <StyledContent>
@@ -77,7 +59,7 @@ class Login extends Component {
             initialValues={{
               remember: true,
             }}
-            onFinish={onFinish}
+            onFinish={(data) => this.onSubmit(data)}
           >
             <Form.Item
               label="Username"

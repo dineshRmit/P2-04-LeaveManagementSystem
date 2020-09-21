@@ -2,22 +2,20 @@ import React, { Component } from "react";
 import { withRouter } from "react-router";
 import { Layout, Breadcrumb } from "antd";
 import styled from "styled-components";
-import { connect } from "react-redux";
 
 const { Content } = Layout;
-class AdminOverview extends Component {
+
+class DeactivateAccount extends Component {
   state = {};
   render() {
-    const { user } = this.props.auth;
     return (
       <StyledLayout>
         <StyledBreadcrum>
           <Breadcrumb.Item>Admin</Breadcrumb.Item>
-          <Breadcrumb.Item>Dashboard</Breadcrumb.Item>
+          <Breadcrumb.Item>Accounts</Breadcrumb.Item>
+          <Breadcrumb.Item>Deactivate Account</Breadcrumb.Item>
         </StyledBreadcrum>
-        <StyledContent>
-          You are logged in as <span style={{ fontFamily: "monospace" }}>ADMIN</span> 👏
-        </StyledContent>
+        <StyledContent>This is the admin deactivate account page</StyledContent>
       </StyledLayout>
     );
   }
@@ -40,8 +38,4 @@ const StyledContent = styled(Content)`
   background-color: white;
 `;
 
-const mapStateToProps = (state) => ({
-  auth: state.auth,
-});
-
-export default connect(mapStateToProps)(withRouter(AdminOverview));
+export default withRouter(DeactivateAccount);

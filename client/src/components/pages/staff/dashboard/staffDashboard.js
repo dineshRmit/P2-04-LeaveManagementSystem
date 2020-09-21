@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 
 const { Content } = Layout;
-class AdminOverview extends Component {
+class StaffDashboard extends Component {
   state = {};
   render() {
     const { user } = this.props.auth;
@@ -44,4 +44,4 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 
-export default connect(mapStateToProps)(withRouter(AdminOverview));
+export default connect(mapStateToProps)(withRouter(StaffDashboard));

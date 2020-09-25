@@ -17,7 +17,7 @@ const ErrorModal = (props) => {
       ]}
     >
       <p>
-        <WarningOutlined twoToneColor="#eb2f96" /> Account with this email id does not exist.
+        <WarningOutlined style={{ color: "red" }} twoToneColor="#eb2f96" /> Account with this email id does not exist.
       </p>
     </Modal>
   );

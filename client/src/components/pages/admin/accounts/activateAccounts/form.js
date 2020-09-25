@@ -11,7 +11,14 @@ const tailLayout = {
 const ActivateAccountForm = (props) => {
   const { onSubmit } = props;
 
-  const onFinish = (values) => {};
+  const onFinish = (values) => {
+    const details = {
+      email: values.user.email,
+      isAccountActive: true,
+    };
+
+    onSubmit(details);
+  };
 
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);

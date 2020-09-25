@@ -72,41 +72,42 @@ router.post("/login", (req, res) => {
     // Check if user exists
     if (!user) {
       return res.status(404).json({ emailnotfound: "Email not found" });
+    } else if (user.isAccountActive == false) {
+      console.log("Account deactivated");
+      return res.status(404).json({ accountDeactivated: "Account not active" });
+    } else {
+      // Check password
+      bcrypt.compare(password, user.password).then((isMatch) => {
+        if (isMatch) {
+          console.log(" seeing inside payload");
+          console.log(user.isAccountActive);
+          console.log(user);
+          const payload = {
+            id: user.id,
+            name: user.name,
+            userType1: user.userType1,
+            userType2: user.userType2,
+            userType3: user.userType3,
+          };
+          // Sign token
+          jwt.sign(
+            payload,
+            keys.secretOrKey,
+            {
+              expiresIn: 31556926, // 1 year in seconds
+            },
+            (err, token) => {
+              res.json({
+                success: true,
+                token: "Bearer " + token,
+              });
+            }
+          );
+        } else {
+          return res.status(400).json({ passwordincorrect: "Password incorrect" });
+        }
+      });
     }
-
-    // Check password
-    bcrypt.compare(password, user.password).then((isMatch) => {
-      if (isMatch) {
-        // User matched
-        // Create JWT Payload
-        console.log(" seeing inside payload");
-        console.log(user);
-        const payload = {
-          id: user.id,
-          name: user.name,
-          userType1: user.userType1,
-          userType2: user.userType2,
-          userType3: user.userType3,
-        };
-
-        // Sign token
-        jwt.sign(
-          payload,
-          keys.secretOrKey,
-          {
-            expiresIn: 31556926, // 1 year in seconds
-          },
-          (err, token) => {
-            res.json({
-              success: true,
-              token: "Bearer " + token,
-            });
-          }
-        );
-      } else {
-        return res.status(400).json({ passwordincorrect: "Password incorrect" });
-      }
-    });
   });
 });
 

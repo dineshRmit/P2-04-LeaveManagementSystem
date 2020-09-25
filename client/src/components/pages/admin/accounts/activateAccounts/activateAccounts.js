@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router";
 import { Layout, Breadcrumb } from "antd";
+import { connect } from "react-redux";
+import { updateUser } from "../../../../../actions/authActions";
 import ActivateAccountForm from "./form";
 import styled from "styled-components";
 
@@ -27,6 +29,19 @@ class ActivateAccount extends Component {
     });
   };
 
+  onSubmit = (data) => {
+    const { updateUser } = this.props;
+
+    updateUser(data).then((res) => {
+      console.log(res);
+      if (res == false) {
+        this.handleErrorModalVisible();
+      } else {
+        this.handleModalVisible();
+      }
+    });
+  };
+
   render() {
     return (
       <StyledLayout>
@@ -39,7 +54,7 @@ class ActivateAccount extends Component {
           <h3 style={{ marginBottom: "1em" }}>
             <b>Activate Account</b>
           </h3>
-          <ActivateAccountForm />
+          <ActivateAccountForm onSubmit={(data) => this.onSubmit(data)} />
           <ConfirmationModal visible={this.state.confirmationModalVisible} handleOk={() => this.handleModalVisible()} />
           <ErrorModal visible={this.state.errorModalVisible} handleOk={() => this.handleErrorModalVisible()} />
         </StyledContent>
@@ -65,4 +80,9 @@ const StyledContent = styled(Content)`
   background-color: white;
 `;
 
-export default withRouter(ActivateAccount);
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  errors: state.errors,
+});
+
+export default connect(mapStateToProps, { updateUser })(withRouter(ActivateAccount));

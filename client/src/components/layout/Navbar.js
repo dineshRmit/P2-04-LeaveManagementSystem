@@ -35,6 +35,10 @@ class Navbar extends Component {
               Create Account
               <Link to="/admin/accounts/createAccount"></Link>
             </Menu.Item>
+            <Menu.Item key="/admin/accounts/activateAccount">
+              Activate Account
+              <Link to="/admin/accounts/activateAccount"></Link>
+            </Menu.Item>
             <Menu.Item key="/admin/accounts/deactivateAccount">
               Deactivate Account
               <Link to="/admin/accounts/deactivateAccount"></Link>

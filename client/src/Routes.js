@@ -31,6 +31,7 @@ import ManagerDashboard from "./components/pages/manager/dashboard/managerDashbo
 import ManagerApplyLeave from "./components/pages/manager/leaves/managerApplyLeave";
 import ManagerLeaveBalance from "./components/pages/manager/leaves/managerLeaveBalance";
 import ManagerManageLeave from "./components/pages/manager/leaves/managerManageLeaves";
+import ActivateAccount from "./components/pages/admin/accounts/activateAccounts/activateAccounts";
 
 const { Header, Sider, Content, Footer } = Layout;
 
@@ -92,6 +93,7 @@ class Routes extends Component {
                 {/* Admin routes */}
                 <PrivateRoute exact path="/admin/dashboard" component={AdminOverview} />
                 <PrivateRoute exact path="/admin/accounts/createAccount" component={CreateAccount} />
+                <PrivateRoute exact path="/admin/accounts/activateAccount" component={ActivateAccount} />
                 <PrivateRoute exact path="/admin/accounts/deactivateAccount" component={DeactivateAccount} />
                 <PrivateRoute exact path="/admin/leaves" component={AdminLeaves} />
                 <PrivateRoute exact path="/admin/calendar" component={AdminCalendar} />

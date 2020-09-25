@@ -17,7 +17,7 @@ const ConfirmationModal = (props) => {
       ]}
     >
       <p>
-        <CheckCircleTwoTone twoToneColor="#52c41a" /> Account successfully deactivated!
+        <CheckCircleTwoTone twoToneColor="#52c41a" /> Account successfully activated!
       </p>
     </Modal>
   );

@@ -110,4 +110,41 @@ router.post("/login", (req, res) => {
   });
 });
 
+// @route POST api/users/updateUser
+// @desc Updates user's active field
+// @access Public
+router.post("/updateUser", (req, res) => {
+  const email = req.body.email;
+  const status = req.body.isAccountActive;
+
+  User.findOneAndUpdate({ email }, { isAccountActive: status }).then((user) => {
+    // Check if user exists
+    if (!user) {
+      return res.status(404).json({ emailnotfound: "Email not found" });
+    } else {
+      return res.json(user);
+    }
+  });
+  // .then(() => {
+  //   User.findOne({ email }).then((user) => {
+  //     return user;
+  //   });
+  // });
+});
+
+// @route POST api/users/getUserDetails
+// @desc Gets users info
+// @access Public
+router.get("/getUserDetails", (req, res) => {
+  const email = req.body.email;
+
+  User.findOne({ email }).then((user) => {
+    if (!user) {
+      return res.status(404).json({ emailnotfound: "Email not found" });
+    } else {
+      return res.json(user);
+    }
+  });
+});
+
 module.exports = router;

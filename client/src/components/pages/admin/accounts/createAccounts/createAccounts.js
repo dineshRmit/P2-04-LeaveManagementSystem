@@ -22,7 +22,7 @@ class CreateAccount extends Component {
     console.log(data);
     const { registerUser } = this.props;
 
-    registerUser(data, this.props.history).then((res) => {
+    registerUser(data).then((res) => {
       console.log(res);
       //this.handleModalText(res[0]);
       if (res == false) {

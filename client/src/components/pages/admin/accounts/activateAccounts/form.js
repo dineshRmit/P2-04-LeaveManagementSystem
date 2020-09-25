@@ -8,17 +8,10 @@ const tailLayout = {
   },
 };
 
-const DeactivateAccountForm = (props) => {
+const ActivateAccountForm = (props) => {
   const { onSubmit } = props;
 
-  const onFinish = (values) => {
-    const details = {
-      email: values.user.email,
-      isAccountActive: false,
-    };
-
-    onSubmit(details);
-  };
+  const onFinish = (values) => {};
 
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
@@ -56,4 +49,4 @@ const DeactivateAccountForm = (props) => {
   );
 };
 
-export default DeactivateAccountForm;
+export default ActivateAccountForm;

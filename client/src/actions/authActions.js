@@ -5,7 +5,7 @@ import jwt_decode from "jwt-decode";
 import { GET_ERRORS, SET_CURRENT_USER, USER_LOADING } from "./types";
 
 // Register User
-export const registerUser = (userData, history) => (dispatch) => {
+export const registerUser = (userData) => (dispatch) => {
   var promise = axios
     .post("/api/users/register", userData)
     .then((res) => {
@@ -21,6 +21,43 @@ export const registerUser = (userData, history) => (dispatch) => {
       return false;
     });
 
+  return promise;
+};
+
+export const updateUser = (userData) => (dispatch) => {
+  var promise = axios
+    .post("/api/users/updateUser", userData)
+    .then((res) => {
+      console.log("User updated");
+      console.log(res);
+      return true;
+    })
+    .catch((err) => {
+      console.log("Update user failed");
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      });
+      return false;
+    });
+  return promise;
+};
+
+export const findUserDetails = (userData) => (dispatch) => {
+  var promise = axios
+    .get("/api/users/getUserDetails", userData)
+    .then((res) => {
+      console.log("Getting user data" + res);
+      return res;
+    })
+    .catch((err) => {
+      console.log("Getting user data failed");
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      });
+      return false;
+    });
   return promise;
 };
 

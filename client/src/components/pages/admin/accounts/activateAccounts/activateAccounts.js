@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router";
 import { Layout, Breadcrumb } from "antd";
-import { connect } from "react-redux";
-import DeactivateAccountForm from "./form";
-import { updateUser } from "../../../../../actions/authActions";
+import ActivateAccountForm from "./form";
 import styled from "styled-components";
 
 import ConfirmationModal from "./confirmationModal";
@@ -11,7 +9,7 @@ import ErrorModal from "./errorModal";
 
 const { Content } = Layout;
 
-class DeactivateAccount extends Component {
+class ActivateAccount extends Component {
   state = {
     confirmationModalVisible: false,
     errorModalVisible: false,
@@ -29,33 +27,19 @@ class DeactivateAccount extends Component {
     });
   };
 
-  onSubmit = (data) => {
-    const { updateUser } = this.props;
-
-    updateUser(data).then((res) => {
-      console.log(res);
-      //this.handleModalText(res[0]);
-      if (res == false) {
-        this.handleErrorModalVisible();
-      } else {
-        this.handleModalVisible();
-      }
-    });
-  };
-
   render() {
     return (
       <StyledLayout>
         <StyledBreadcrum>
           <Breadcrumb.Item>Admin</Breadcrumb.Item>
           <Breadcrumb.Item>Accounts</Breadcrumb.Item>
-          <Breadcrumb.Item>Deactivate Account</Breadcrumb.Item>
+          <Breadcrumb.Item>Activate Account</Breadcrumb.Item>
         </StyledBreadcrum>
         <StyledContent>
           <h3 style={{ marginBottom: "1em" }}>
-            <b>Deactivate Account</b>
+            <b>Activate Account</b>
           </h3>
-          <DeactivateAccountForm onSubmit={(data) => this.onSubmit(data)} />
+          <ActivateAccountForm />
           <ConfirmationModal visible={this.state.confirmationModalVisible} handleOk={() => this.handleModalVisible()} />
           <ErrorModal visible={this.state.errorModalVisible} handleOk={() => this.handleErrorModalVisible()} />
         </StyledContent>
@@ -81,9 +65,4 @@ const StyledContent = styled(Content)`
   background-color: white;
 `;
 
-const mapStateToProps = (state) => ({
-  auth: state.auth,
-  errors: state.errors,
-});
-
-export default connect(mapStateToProps, { updateUser })(withRouter(DeactivateAccount));
+export default withRouter(ActivateAccount);

@@ -6,15 +6,22 @@ import { GET_ERRORS, SET_CURRENT_USER, USER_LOADING } from "./types";
 
 // Register User
 export const registerUser = (userData, history) => (dispatch) => {
-  axios
+  var promise = axios
     .post("/api/users/register", userData)
-    .then((res) => history.push("/login"))
-    .catch((err) =>
+    .then((res) => {
+      console.log("Api successful");
+      return true;
+    })
+    .catch((err) => {
+      console.log("Api un-successful");
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data,
-      })
-    );
+      });
+      return false;
+    });
+
+  return promise;
 };
 
 // Login - get user token

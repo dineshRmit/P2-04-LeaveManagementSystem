@@ -27,6 +27,10 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
+  isAccountActive: {
+    type: Boolean,
+    default: true,
+  },
   date: {
     type: Date,
     default: Date.now,

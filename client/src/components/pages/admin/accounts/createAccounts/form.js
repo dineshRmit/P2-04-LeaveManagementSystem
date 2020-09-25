@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Input, Button, Checkbox, Select } from "antd";
+import { Form, Input, Button, Select } from "antd";
 import "antd/dist/antd.css";
 
 const tailLayout = {
@@ -10,10 +10,7 @@ const tailLayout = {
 
 const Demo = (props) => {
   const { onSubmit } = props;
-  // const [name, setName] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [userType, setUserType] = useState([]);
+  const [form] = Form.useForm();
 
   const onFinish = (values) => {
     let firstAccountType, secondAccountType, thirdAccountType;
@@ -53,15 +50,12 @@ const Demo = (props) => {
     console.log("Failed:", errorInfo);
   };
 
+  const onResetClick = () => {
+    form.resetFields();
+  };
+
   return (
-    <Form
-      name="basic"
-      initialValues={{
-        remember: true,
-      }}
-      onFinish={onFinish}
-      onFinishFailed={onFinishFailed}
-    >
+    <Form form={form} name="basic" onFinish={onFinish} onFinishFailed={onFinishFailed}>
       <Form.Item name={["user", "name"]} label="Name" rules={[{ required: true, message: "Please input name!" }]}>
         <Input placeholder="Enter name" style={{ width: "200px" }} />
       </Form.Item>
@@ -71,8 +65,9 @@ const Demo = (props) => {
         label="Email"
         rules={[
           {
+            type: "email",
             required: true,
-            message: "Please input email!",
+            message: "Please enter valid email!",
           },
         ]}
       >
@@ -89,7 +84,7 @@ const Demo = (props) => {
           },
         ]}
       >
-        <Input.Password style={{ width: "200px" }} />
+        <Input.Password placeholder="Enter password" style={{ width: "200px" }} />
       </Form.Item>
 
       <Form.Item
@@ -112,6 +107,10 @@ const Demo = (props) => {
       <Form.Item {...tailLayout}>
         <Button type="primary" htmlType="submit">
           Submit
+        </Button>
+        <Button style={{ marginLeft: "2em", minWidth: "53px" }} type="secondary" onClick={() => onResetClick()}>
+          {" "}
+          Reset
         </Button>
       </Form.Item>
     </Form>

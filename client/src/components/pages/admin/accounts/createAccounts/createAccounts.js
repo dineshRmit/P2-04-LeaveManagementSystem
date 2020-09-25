@@ -5,19 +5,44 @@ import { registerUser } from "../../../../../actions/authActions";
 import { Layout, Breadcrumb } from "antd";
 import Demo from "./form";
 
+import ConfirmationModal from "./confirmationModal";
+import ErrorModal from "./errorModal";
+
 import styled from "styled-components";
 
-const { Content, Header } = Layout;
+const { Content } = Layout;
 
 class CreateAccount extends Component {
-  state = {};
+  state = {
+    confirmationModalVisible: false,
+    errorModalVisible: false,
+  };
 
-  onSubmit = (data) => {
-    console.log("Hello world");
+  onSubmit = async (data) => {
     console.log(data);
     const { registerUser } = this.props;
 
-    registerUser(data, this.props.history);
+    registerUser(data, this.props.history).then((res) => {
+      console.log(res);
+      //this.handleModalText(res[0]);
+      if (res == false) {
+        this.handleErrorModalVisible();
+      } else {
+        this.handleModalVisible();
+      }
+    });
+  };
+
+  handleModalVisible = () => {
+    this.setState({
+      confirmationModalVisible: !this.state.confirmationModalVisible,
+    });
+  };
+
+  handleErrorModalVisible = () => {
+    this.setState({
+      errorModalVisible: !this.state.errorModalVisible,
+    });
   };
 
   render() {
@@ -33,6 +58,8 @@ class CreateAccount extends Component {
             <b>Create Account</b>
           </h3>
           <Demo onSubmit={(data) => this.onSubmit(data)} />
+          <ConfirmationModal visible={this.state.confirmationModalVisible} handleOk={() => this.handleModalVisible()} />
+          <ErrorModal visible={this.state.errorModalVisible} handleOk={() => this.handleErrorModalVisible()} />
         </StyledContent>
       </StyledLayout>
     );

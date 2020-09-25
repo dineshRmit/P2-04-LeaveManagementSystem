@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router";
 import { Layout, Breadcrumb } from "antd";
+import DeactivateAccountForm from "./form";
 import styled from "styled-components";
 
 const { Content } = Layout;
@@ -15,7 +16,12 @@ class DeactivateAccount extends Component {
           <Breadcrumb.Item>Accounts</Breadcrumb.Item>
           <Breadcrumb.Item>Deactivate Account</Breadcrumb.Item>
         </StyledBreadcrum>
-        <StyledContent>This is the admin deactivate account page</StyledContent>
+        <StyledContent>
+          <h3 style={{ marginBottom: "1em" }}>
+            <b>Deactivate Account</b>
+          </h3>
+          <DeactivateAccountForm />
+        </StyledContent>
       </StyledLayout>
     );
   }

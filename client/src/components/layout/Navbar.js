@@ -67,27 +67,29 @@ class Navbar extends Component {
             Dashboard
             <Link to="/staff/dashboard"></Link>
           </Menu.Item>
-          <SubMenu icon={<UserOutlined />} title="Accounts">
+
+          {/* will require this later */}
+          {/* <SubMenu icon={<UserOutlined />} title="Accounts">
             <Menu.Item key="/staff/accounts/changePassword">
               Change password
               <Link to="/staff/accounts/changePassword"></Link>
             </Menu.Item>
-          </SubMenu>
+          </SubMenu> */}
 
           <SubMenu icon={<HomeOutlined />} title="Leaves">
-            <Menu.Item key="/staff/leave">
+            <Menu.Item key="/staff/leave/leaveBalance">
               View leave balance
-              <Link to="/staff/leaves"></Link>
+              <Link to="/staff/leave/leaveBalance"></Link>
             </Menu.Item>
-            <Menu.Item key="/staff/leave">
+            <Menu.Item key="/staff/leave/applyLeave">
               Apply leave
-              <Link to="/staff/leave"></Link>
+              <Link to="/staff/leave/applyLeave"></Link>
             </Menu.Item>
           </SubMenu>
-          <Menu.Item key="/admin/calendar" icon={<CalendarOutlined />}>
+          {/* <Menu.Item key="/admin/calendar" icon={<CalendarOutlined />}>
             Calendar
             <Link to="/admin/calendar"></Link>
-          </Menu.Item>
+          </Menu.Item> */}
         </Menu>
       </Sider>
     );

@@ -20,15 +20,30 @@ class Login extends Component {
   }
 
   componentDidMount() {
+    const { history } = this.props;
     // If logged in and user navigates to Login page, should redirect them to dashboard
     if (this.props.auth.isAuthenticated) {
-      this.props.history.push("/admin/dashboard");
+      if (this.props.auth.user.userType1 === "admin") {
+        history.push("/admin/dashboard");
+      } else if (this.props.auth.user.userType1 === "staff") {
+        history.push("/staff/dashboard");
+      } else {
+        history.push("/manager/dashboard");
+      }
     }
   }
 
   componentWillReceiveProps(nextProps) {
+    const { history } = this.props;
+
     if (nextProps.auth.isAuthenticated) {
-      this.props.history.push("/admin/dashboard");
+      if (nextProps.auth.user.userType1 === "admin") {
+        history.push("/admin/dashboard");
+      } else if (nextProps.auth.user.userType1 === "staff") {
+        history.push("/staff/dashboard");
+      } else {
+        history.push("/manager/dashboard");
+      }
     }
 
     if (nextProps.errors) {

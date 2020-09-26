@@ -5,16 +5,21 @@ import styled from "styled-components";
 
 const { Content } = Layout;
 
-class StaffLeaves extends Component {
+class StaffApplyLeave extends Component {
   state = {};
   render() {
     return (
       <StyledLayout>
         <StyledBreadcrum>
           <Breadcrumb.Item>Staff</Breadcrumb.Item>
-          <Breadcrumb.Item>Leaves</Breadcrumb.Item>
+          <Breadcrumb.Item>Leave</Breadcrumb.Item>
+          <Breadcrumb.Item>Apply Leave</Breadcrumb.Item>
         </StyledBreadcrum>
-        <StyledContent>This is the staff leaves page</StyledContent>
+        <StyledContent>
+          <h3 style={{ marginBottom: "1em" }}>
+            <b>Apply Leave</b>
+          </h3>
+        </StyledContent>
       </StyledLayout>
     );
   }
@@ -37,4 +42,4 @@ const StyledContent = styled(Content)`
   background-color: white;
 `;
 
-export default withRouter(StaffLeaves);
+export default withRouter(StaffApplyLeave);

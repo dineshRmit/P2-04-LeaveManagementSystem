@@ -24,8 +24,8 @@ import AdminLeaves from "./components/pages/admin/leaves/adminLeaves";
 import AdminCalendar from "./components/pages/admin/calendar/adminCalendar";
 
 import StaffDashboard from "./components/pages/staff/dashboard/staffDashboard";
-import StaffLeaveBalance from "./components/pages/staff/leaves/staffLeaveBalance";
-import StaffApplyLeave from "./components/pages/staff/leaves/staffApplyLeave";
+import StaffLeaveBalance from "./components/pages/staff/leaves/leaveBalance/staffLeaveBalance";
+import StaffApplyLeave from "./components/pages/staff/leaves/applyLeave/staffApplyLeave";
 
 import ManagerDashboard from "./components/pages/manager/dashboard/managerDashboard";
 import ManagerApplyLeave from "./components/pages/manager/leaves/managerApplyLeave";
@@ -100,8 +100,8 @@ class Routes extends Component {
 
                 {/* Staff routes */}
                 <PrivateRoute exact path="/staff/dashboard" component={StaffDashboard} />
-                <PrivateRoute exact path="/staff/leaves/leaveBalance" component={StaffLeaveBalance} />
-                <PrivateRoute exact path="/staff/leaves/applyLeave" component={StaffApplyLeave} />
+                <PrivateRoute exact path="/staff/leave/leaveBalance" component={StaffLeaveBalance} />
+                <PrivateRoute exact path="/staff/leave/applyLeave" component={StaffApplyLeave} />
 
                 {/* Manager routes */}
                 <PrivateRoute exact path="/manager/dashboard" component={ManagerDashboard} />

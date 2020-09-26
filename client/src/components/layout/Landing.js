@@ -13,7 +13,13 @@ class Landing extends Component {
   componentDidMount = () => {
     const { history } = this.props;
     if (this.props.auth.isAuthenticated) {
-      history.push("/admin/dashboard");
+      if (this.props.auth.user.userType1 === "admin") {
+        history.push("/admin/dashboard");
+      } else if (this.props.auth.user.userType1 === "staff") {
+        history.push("/staff/dashboard");
+      } else {
+        history.push("/manager/dashboard");
+      }
     }
   };
 

@@ -12,7 +12,7 @@ import Navbar from "./components/layout/Navbar";
 import Login from "./components/auth/Login";
 // import AdminHome from "./components/pages/adminHome";
 import Landing from "./components/layout/Landing";
-import Register from "./components/auth/Register";
+// import Register from "./components/auth/Register";
 import PrivateRoute from "./components/private-route/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
 
@@ -87,7 +87,7 @@ class Routes extends Component {
             </StyledHeader>
             <Content>
               <Route exact path="/" component={Landing} />
-              <Route exact path="/register" component={Register} />
+              {/* <Route exact path="/register" component={Register} /> */}
               <Route exact path="/login" component={Login} />
               <Switch>
                 {/* Admin routes */}

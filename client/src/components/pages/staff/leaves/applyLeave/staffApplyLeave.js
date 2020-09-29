@@ -3,6 +3,8 @@ import { withRouter } from "react-router";
 import { Layout, Breadcrumb } from "antd";
 import styled from "styled-components";
 
+import ActivateAccountForm from "./form";
+
 const { Content } = Layout;
 
 class StaffApplyLeave extends Component {
@@ -19,6 +21,7 @@ class StaffApplyLeave extends Component {
           <h3 style={{ marginBottom: "1em" }}>
             <b>Apply Leave</b>
           </h3>
+          <ActivateAccountForm onSubmit={(data) => this.onSubmit(data)} />
         </StyledContent>
       </StyledLayout>
     );

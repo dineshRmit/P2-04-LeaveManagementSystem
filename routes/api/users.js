@@ -123,9 +123,18 @@ router.post("/login", (req, res) => {
           const payload = {
             id: user.id,
             name: user.name,
+            email: user.email,
             userType1: user.userType1,
             userType2: user.userType2,
             userType3: user.userType3,
+            leave: {
+              annualLeave: user.annualLeave,
+              carersLeave: user.carersLeave,
+              bloodDonorLeave: user.bloodDonorLeave,
+              sickLeaveWC: user.sickLeaveWC,
+              parentalLeave: user.parentalLeave,
+              unpaidLeave: user.unpaidLeave,
+            },
           };
           // Sign token
           jwt.sign(

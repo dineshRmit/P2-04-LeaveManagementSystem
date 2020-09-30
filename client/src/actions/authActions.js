@@ -24,6 +24,28 @@ export const registerUser = (userData) => (dispatch) => {
   return promise;
 };
 
+export const requestLeave = (leaveData) => (dispatch) => {
+  console.log("Printing the body of the req \n");
+  console.log(leaveData);
+  var promise = axios
+    .post("/api/users/applyLeave", leaveData)
+    .then((res) => {
+      console.log("New leave registered successfully");
+      return true;
+    })
+    .catch((err) => {
+      console.log("Error creating a leave request");
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      });
+      console.log(err);
+      return false;
+    });
+
+  return promise;
+};
+
 export const updateUser = (userData) => (dispatch) => {
   var promise = axios
     .post("/api/users/updateUser", userData)

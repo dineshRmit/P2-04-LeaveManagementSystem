@@ -10,13 +10,13 @@ const tailLayout = {
 };
 
 const ActivateAccountForm = (props) => {
-  const { onSubmit } = props;
+  const { onSubmit, clearForm, clearFormFunc } = props;
   const [form] = Form.useForm();
   const [error, setErrorValue] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
   const onFinish = (values) => {
-    console.log(values);
+    onSubmit(values);
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -30,6 +30,13 @@ const ActivateAccountForm = (props) => {
 
   const onResetClick = () => {
     form.resetFields();
+  };
+
+  const clearFormData = () => {
+    if (clearForm == true) {
+      onResetClick();
+      clearFormFunc();
+    }
   };
 
   const setError = () => {
@@ -53,7 +60,7 @@ const ActivateAccountForm = (props) => {
           },
         ]}
       >
-        <DatePicker disabledDate={disabledDate} />
+        <DatePicker disabledDate={disabledDate} style={{ marginLeft: "1.2em" }} />
       </Form.Item>
 
       <Form.Item
@@ -66,7 +73,7 @@ const ActivateAccountForm = (props) => {
           },
         ]}
       >
-        <DatePicker disabledDate={disabledDate} style={{ marginLeft: "1.3em" }} />
+        <DatePicker disabledDate={disabledDate} style={{ marginLeft: "2.5em" }} />
       </Form.Item>
 
       <Form.Item
@@ -79,7 +86,7 @@ const ActivateAccountForm = (props) => {
           },
         ]}
       >
-        <Select placeholder="Select leave type" style={{ width: "200px", marginLeft: "1.8em" }}>
+        <Select placeholder="Select leave type" style={{ width: "200px", marginLeft: "2.9em" }}>
           <Select.Option value="annual">Annual leave</Select.Option>
           <Select.Option value="carer">Carer’s leave</Select.Option>
           <Select.Option value="blood">Blood donor leave</Select.Option>
@@ -99,8 +106,24 @@ const ActivateAccountForm = (props) => {
           },
         ]}
       >
-        <Input placeholder="Enter leave information" style={{ width: "300px", marginLeft: "1.2em" }} />
+        <Input placeholder="Enter leave information" style={{ width: "300px", marginLeft: "2.2em" }} />
       </Form.Item>
+
+      <Form.Item
+        name="approvedBy"
+        label="Approved By"
+        rules={[
+          {
+            required: true,
+            message: "Please enter information",
+          },
+        ]}
+      >
+        <Input placeholder="Enter manager email" style={{ width: "285px" }} />
+      </Form.Item>
+
+      {clearForm ? clearFormData() : <div />}
+
       {error ? (
         <Form.Item
           rules={[

@@ -27,6 +27,34 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
+  annualLeave: {
+    type: Number,
+    default: 10,
+  },
+  carersLeave: {
+    type: Number,
+    default: 10,
+  },
+  bloodDonorLeave: {
+    type: Number,
+    default: 10,
+  },
+  sickLeaveWC: {
+    type: Number,
+    default: 10,
+  },
+  sickLeaveWOC: {
+    type: Number,
+    default: 10,
+  },
+  parentalLeave: {
+    type: Number,
+    default: 10,
+  },
+  unpaidLeave: {
+    type: Number,
+    default: 10,
+  },
   isAccountActive: {
     type: Boolean,
     default: true,

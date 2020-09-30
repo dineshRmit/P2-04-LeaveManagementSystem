@@ -12,6 +12,9 @@ const validateLoginInput = require("../../validation/login");
 // Load User model
 const User = require("../../models/User");
 
+//Load Leave model
+const Leaves = require("../../models/Leaves");
+
 // @route POST api/users/register
 // @desc Register user
 // @access Public
@@ -47,6 +50,41 @@ router.post("/register", (req, res) => {
             .catch((err) => console.log(err));
         });
       });
+    }
+  });
+});
+
+// @route POST api/users/applyLeave
+// @desc Register user
+// @access Public
+router.post("/applyLeave", (req, res) => {
+  console.log(req.body.toEmail);
+  //find if the manager in the req exists
+  User.findOne({ email: req.body.toEmail }).then((user) => {
+    console.log(user);
+    if (!user) {
+      return res.status(404).json({ emailNotFound: "Email not found" });
+    } else if (user.isAccountActive == false) {
+      return res.status(404).json({ accountDeactivated: "Manager account not active" });
+    } else if (user.userType1 !== "manager") {
+      return res.status(404).json({ accountDeactivated: "Not a valid manager account" });
+    } else {
+      //Create a new leave
+
+      const newLeave = new Leaves({
+        name: req.body.name,
+        fromEmail: req.body.fromEmail,
+        toEmail: req.body.toEmail,
+        fromDate: req.body.fromDate,
+        toDate: req.body.toDate,
+        leaveType: req.body.leaveType,
+        comments: req.body.comments,
+      });
+
+      newLeave
+        .save()
+        .then((leave) => res.json(leave))
+        .catch((err) => console.log(err));
     }
   });
 });
@@ -104,9 +142,7 @@ router.post("/login", (req, res) => {
             }
           );
         } else {
-          return res
-            .status(400)
-            .json({ passwordincorrect: "Password incorrect" });
+          return res.status(400).json({ passwordincorrect: "Password incorrect" });
         }
       });
     }

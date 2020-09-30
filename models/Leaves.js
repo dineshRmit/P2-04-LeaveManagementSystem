@@ -16,11 +16,11 @@ const LeavesSchema = new Schema({
     required: true,
   },
   fromDate: {
-    type: date,
+    type: String,
     required: true,
   },
   toDate: {
-    type: date,
+    type: String,
     required: true,
   },
   leaveType: {

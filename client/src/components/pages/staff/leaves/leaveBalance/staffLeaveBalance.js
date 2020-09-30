@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import { Layout, Breadcrumb } from "antd";
 import { Row, Col } from "antd";
@@ -20,13 +21,13 @@ const columns = [
 
 class StaffLeaves extends Component {
   state = {
-    annualLeaveBalance: 10,
-    carerLeaveBalance: 10,
-    bloodDonorLeaveBalance: 10,
-    sickLeaveCertBalance: 10,
-    sickLeaveNoCertBalance: 10,
-    parentalLeaveBalance: 10,
-    unpaidLeaveBalance: 10,
+    annualLeaveBalance: this.props.auth.user.leave.annualLeave,
+    carerLeaveBalance: this.props.auth.user.leave.carersLeave,
+    bloodDonorLeaveBalance: this.props.auth.user.leave.bloodDonorLeave,
+    sickLeaveCertBalance: this.props.auth.user.leave.sickLeaveWC,
+    sickLeaveNoCertBalance: this.props.auth.user.leave.sickLeaveWOC,
+    parentalLeaveBalance: this.props.auth.user.leave.parentalLeave,
+    unpaidLeaveBalance: this.props.auth.user.leave.unpaidLeave,
   };
 
   componentDidMount = () => {};
@@ -129,4 +130,9 @@ const StyledContent = styled(Content)`
   background-color: white;
 `;
 
-export default withRouter(StaffLeaves);
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  errors: state.errors,
+});
+
+export default connect(mapStateToProps, {})(withRouter(StaffLeaves));

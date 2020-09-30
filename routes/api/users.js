@@ -132,6 +132,7 @@ router.post("/login", (req, res) => {
               carersLeave: user.carersLeave,
               bloodDonorLeave: user.bloodDonorLeave,
               sickLeaveWC: user.sickLeaveWC,
+              sickLeaveWOC: user.sickLeaveWOC,
               parentalLeave: user.parentalLeave,
               unpaidLeave: user.unpaidLeave,
             },

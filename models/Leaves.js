@@ -7,23 +7,27 @@ const LeavesSchema = new Schema({
     type: String,
     required: true,
   },
-  comments: {
+  fromEmail: {
     type: String,
     required: true,
   },
-  email: {
+  toEmail: {
     type: String,
     required: true,
   },
   fromDate: {
-    type: date,
+    type: String,
     required: true,
   },
   toDate: {
-    type: date,
+    type: String,
     required: true,
   },
   leaveType: {
+    type: String,
+    required: true,
+  },
+  comments: {
     type: String,
     required: true,
   },

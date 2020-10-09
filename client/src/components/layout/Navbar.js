@@ -119,9 +119,9 @@ class Navbar extends Component {
               Apply leave
               <Link to="/manager/leave/applyLeave"></Link>
             </Menu.Item>
-            <Menu.Item key="/manager/leave/reviewLeave">
-              Review leave
-              <Link to="/manager/leave/reviewLeave"></Link>
+            <Menu.Item key="/manager/leave/manageLeaves">
+              Manage leave
+              <Link to="/manager/leave/manageLeaves"></Link>
             </Menu.Item>
           </SubMenu>
         </Menu>

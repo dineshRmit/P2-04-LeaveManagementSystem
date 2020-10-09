@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import { Layout, Breadcrumb } from "antd";
 import styled from "styled-components";
@@ -7,18 +8,28 @@ const { Content } = Layout;
 
 class ManagerManageLeaves extends Component {
   state = {};
+
   render() {
     return (
       <StyledLayout>
         <StyledBreadcrum>
           <Breadcrumb.Item>Manager</Breadcrumb.Item>
-          <Breadcrumb.Item>Manage Leave</Breadcrumb.Item>
+          <Breadcrumb.Item>Leave</Breadcrumb.Item>
+          <Breadcrumb.Item>Manage Leaves</Breadcrumb.Item>
         </StyledBreadcrum>
-        <StyledContent>This is the Manger manage leaves page</StyledContent>
+        <StyledContent>
+          <h3 style={{ marginBottom: "1em" }}>
+            <b>Manage Leaves</b>
+          </h3>
+        </StyledContent>
       </StyledLayout>
     );
   }
 }
+
+const TableDiv = styled.div`
+  width: 50%;
+`;
 
 const StyledLayout = styled(Layout)`
   padding: 0 24px 24px;
@@ -37,4 +48,9 @@ const StyledContent = styled(Content)`
   background-color: white;
 `;
 
-export default withRouter(ManagerManageLeaves);
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  errors: state.errors,
+});
+
+export default connect(mapStateToProps, {})(withRouter(ManagerManageLeaves));

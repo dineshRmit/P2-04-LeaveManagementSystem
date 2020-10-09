@@ -27,8 +27,9 @@ import StaffDashboard from "./components/pages/staff/dashboard/staffDashboard";
 import StaffLeaveBalance from "./components/pages/staff/leaves/leaveBalance/staffLeaveBalance";
 import StaffApplyLeave from "./components/pages/staff/leaves/applyLeave/staffApplyLeave";
 
+import ChangePassword from "./components/pages/manager/accounts/changePassword";
 import ManagerDashboard from "./components/pages/manager/dashboard/managerDashboard";
-import ManagerApplyLeave from "./components/pages/manager/leaves/managerApplyLeave";
+import ManagerApplyLeave from "./components/pages/manager/leaves/applyLeave/managerApplyLeave";
 import ManagerLeaveBalance from "./components/pages/manager/leaves/managerLeaveBalance";
 import ManagerManageLeave from "./components/pages/manager/leaves/managerManageLeaves";
 import ActivateAccount from "./components/pages/admin/accounts/activateAccounts/activateAccounts";
@@ -105,7 +106,10 @@ class Routes extends Component {
 
                 {/* Manager routes */}
                 <PrivateRoute exact path="/manager/dashboard" component={ManagerDashboard} />
-                <PrivateRoute exact path="/manager/leaves/applyLeave" component={ManagerApplyLeave} />
+                <PrivateRoute exact path="/manager/accounts/changePassword" component={ChangePassword} />
+                <PrivateRoute exact path="/manager/leave/leaveBalance" component={ManagerLeaveBalance} />
+                <PrivateRoute exact path="/manager/leave/applyLeave" component={ManagerApplyLeave} />
+                <PrivateRoute exact path="/manager/leave/reviewLeaves" component={ManagerApplyLeave} />
               </Switch>
             </Content>
             <StyledFooter className="layout-footer">SEPM - Group P2-04 </StyledFooter>

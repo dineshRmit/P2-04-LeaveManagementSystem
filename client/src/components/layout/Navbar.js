@@ -95,6 +95,40 @@ class Navbar extends Component {
     );
   };
 
+  ManagerRender = () => {
+    return (
+      <Sider trigger={null} collapsible collapsed={this.props.collapsed}>
+        <div className="logo" />
+        <Menu theme="dark" mode="inline" onSelect={this.handleMenuClick} defaultSelectedKeys={[lastPath]}>
+          <Menu.Item key="/manager/dashboard" icon={<DashboardOutlined />}>
+            Dashboard
+            <Link to="/manager/dashboard"></Link>
+          </Menu.Item>
+          <SubMenu icon={<UserOutlined />} title="Accounts">
+            <Menu.Item key="/manager/accounts/changePassword">
+              Change password
+              <Link to="/manager/accounts/changePassword"></Link>
+            </Menu.Item>
+          </SubMenu>
+          <SubMenu icon={<HomeOutlined />} title="Leaves">
+            <Menu.Item key="/manager/leave/leaveBalance">
+              View leave balance
+              <Link to="/manager/leave/leaveBalance"></Link>
+            </Menu.Item>
+            <Menu.Item key="/manager/leave/applyLeave">
+              Apply leave
+              <Link to="/manager/leave/applyLeave"></Link>
+            </Menu.Item>
+            <Menu.Item key="/manager/leave/reviewLeave">
+              Review leave
+              <Link to="/manager/leave/reviewLeave"></Link>
+            </Menu.Item>
+          </SubMenu>
+        </Menu>
+      </Sider>
+    );
+  };
+
   render() {
     return (
       <>

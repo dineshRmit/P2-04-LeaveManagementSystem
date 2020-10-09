@@ -174,11 +174,6 @@ router.post("/updateUser", (req, res) => {
       return res.json(user);
     }
   });
-  // .then(() => {
-  //   User.findOne({ email }).then((user) => {
-  //     return user;
-  //   });
-  // });
 });
 
 // @route POST api/users/getUserDetails
@@ -192,6 +187,38 @@ router.get("/getUserDetails", (req, res) => {
       return res.status(404).json({ emailnotfound: "Email not found" });
     } else {
       return res.json(user);
+    }
+  });
+});
+
+// @route GET api/users/getLeaveRequest
+// @desc Get Leave request list for a manager
+// @access Public
+router.get("/getLeaveRequest", (req, res) => {
+  const toEmail = req.body.managerEmail;
+
+  Leaves.findOne({ toEmail }).then((leaveRequest) => {
+    if (!leaveRequest) {
+      return res.status(404).json({ noRequestExists: "No Leave request to display" });
+    } else {
+      return res.json(leaveRequest);
+    }
+  });
+});
+
+// @route POST api/users/updateLeaveRequest
+// @desc Get Leave request list for a manager
+// @access Public
+router.post("/updateLeaveRequest", (req, res) => {
+  const _id = req.body.id;
+  const leaveRequestStatus = req.body.status;
+
+  User.findOneAndUpdate({ _id }, { status: leaveRequestStatus }).then((leaveRequest) => {
+    // Check if user exists
+    if (!leaveRequest) {
+      return res.status(404).json({ noRequestExists: "Leave Request does not exists" });
+    } else {
+      return res.json(leaveRequest);
     }
   });
 });

@@ -73,7 +73,7 @@ const ActivateAccountForm = (props) => {
       </Form.Item>
 
       <Form.Item {...tailLayout}>
-        <Button type="primary" htmlType="submit">
+        <Button type="primary" htmlType="submit" disabled>
           Submit
         </Button>
       </Form.Item>

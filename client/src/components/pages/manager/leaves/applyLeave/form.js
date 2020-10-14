@@ -9,7 +9,7 @@ const tailLayout = {
   },
 };
 
-const ActivateAccountForm = (props) => {
+const ApplyLeaveForm = (props) => {
   const { onSubmit, clearForm, clearFormFunc } = props;
   const [form] = Form.useForm();
   const [error, setErrorValue] = useState(false);
@@ -87,12 +87,12 @@ const ActivateAccountForm = (props) => {
         ]}
       >
         <Select placeholder="Select leave type" style={{ width: "200px", marginLeft: "2.9em" }}>
-          <Select.Option value="annual">Annual leave</Select.Option>
-          <Select.Option value="carer">Carer’s leave</Select.Option>
-          <Select.Option value="blood">Blood donor leave</Select.Option>
-          <Select.Option value="sickCert">Sick leave(certificate)</Select.Option>
-          <Select.Option value="sickNoCert">Sick leave(w/o certificate)</Select.Option>
-          <Select.Option value="unpaid">Unpaid leave</Select.Option>
+          <Select.Option value="annualLeave">Annual leave</Select.Option>
+          <Select.Option value="carersLeave">Carer’s leave</Select.Option>
+          <Select.Option value="bloodDonorLeave">Blood donor leave</Select.Option>
+          <Select.Option value="sickLeaveWC">Sick leave(certificate)</Select.Option>
+          <Select.Option value="sickLeaveWOC">Sick leave(w/o certificate)</Select.Option>
+          <Select.Option value="unpaidLeave">Unpaid leave</Select.Option>
         </Select>
       </Form.Item>
 
@@ -151,4 +151,4 @@ const ActivateAccountForm = (props) => {
   );
 };
 
-export default ActivateAccountForm;
+export default ApplyLeaveForm;

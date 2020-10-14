@@ -24,6 +24,7 @@ export const registerUser = (userData) => (dispatch) => {
   return promise;
 };
 
+//Request leave
 export const requestLeave = (leaveData) => (dispatch) => {
   console.log("Printing the body of the req \n");
   console.log(leaveData);
@@ -80,6 +81,46 @@ export const findUserDetails = (userData) => (dispatch) => {
       });
       return false;
     });
+  return promise;
+};
+
+//Get leave request
+export const getLeaveRequest = (managerEmail) => (dispatch) => {
+  console.log(managerEmail);
+  var promise = axios
+    .get(`/api/users/getLeaveRequest/${managerEmail}`)
+    .then((res) => {
+      console.log("Getting leave data" + res);
+      return res;
+    })
+    .catch((err) => {
+      console.log("Getting leave data failed");
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      });
+      return false;
+    });
+  return promise;
+};
+
+// Update Leave request
+export const updateLeaveRequest = (leaveRequestID) => (dispatch) => {
+  var promise = axios
+    .post("/api/users/updateLeaveRequest", leaveRequestID)
+    .then((res) => {
+      console.log("Api successful");
+      return true;
+    })
+    .catch((err) => {
+      console.log("Api un-successful");
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      });
+      return false;
+    });
+
   return promise;
 };
 

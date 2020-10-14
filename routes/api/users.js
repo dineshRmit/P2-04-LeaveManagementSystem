@@ -58,10 +58,8 @@ router.post("/register", (req, res) => {
 // @desc Register user
 // @access Public
 router.post("/applyLeave", (req, res) => {
-  console.log(req.body.toEmail);
   //find if the manager in the req exists
   User.findOne({ email: req.body.toEmail }).then((user) => {
-    console.log(user);
     if (!user) {
       return res.status(404).json({ emailNotFound: "Email not found" });
     } else if (user.isAccountActive == false) {
@@ -111,15 +109,11 @@ router.post("/login", (req, res) => {
     if (!user) {
       return res.status(404).json({ emailnotfound: "Email not found" });
     } else if (user.isAccountActive == false) {
-      console.log("Account deactivated");
       return res.status(404).json({ accountDeactivated: "Account not active" });
     } else {
       // Check password
       bcrypt.compare(password, user.password).then((isMatch) => {
         if (isMatch) {
-          console.log(" seeing inside payload");
-          console.log(user.isAccountActive);
-          console.log(user);
           const payload = {
             id: user.id,
             name: user.name,
@@ -194,10 +188,12 @@ router.get("/getUserDetails", (req, res) => {
 // @route GET api/users/getLeaveRequest
 // @desc Get Leave request list for a manager
 // @access Public
-router.get("/getLeaveRequest", (req, res) => {
-  const toEmail = req.body.managerEmail;
+router.get("/getLeaveRequest/:managerEmail", (req, res) => {
+  console.log("Displaying req.params");
+  console.log(req.params);
+  const managerEmail = req.params.managerEmail;
 
-  Leaves.findOne({ toEmail }).then((leaveRequest) => {
+  Leaves.find({ toEmail: managerEmail }).then((leaveRequest) => {
     if (!leaveRequest) {
       return res.status(404).json({ noRequestExists: "No Leave request to display" });
     } else {
@@ -210,10 +206,10 @@ router.get("/getLeaveRequest", (req, res) => {
 // @desc Get Leave request list for a manager
 // @access Public
 router.post("/updateLeaveRequest", (req, res) => {
-  const _id = req.body.id;
+  var ObjectId = req.body.id;
   const leaveRequestStatus = req.body.status;
 
-  User.findOneAndUpdate({ _id }, { status: leaveRequestStatus }).then((leaveRequest) => {
+  Leaves.findOneAndUpdate({ _id: ObjectId }, { status: leaveRequestStatus }).then((leaveRequest) => {
     // Check if user exists
     if (!leaveRequest) {
       return res.status(404).json({ noRequestExists: "Leave Request does not exists" });

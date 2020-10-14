@@ -2,12 +2,14 @@ import React, { Component } from "react";
 import { withRouter } from "react-router";
 import { Layout, Breadcrumb } from "antd";
 import { connect } from "react-redux";
-import ActivateAccountForm from "./form";
 import { requestLeave } from "../../../../../actions/authActions";
 import styled from "styled-components";
 
+import moment from "moment";
+
 import ConfirmationModal from "./confirmationModal";
 import ErrorModal from "./errorModal";
+import ApplyLeaveForm from "./form";
 
 const { Content } = Layout;
 
@@ -54,13 +56,19 @@ class ManagerApplyLeave extends Component {
 
   onSubmit = (data) => {
     const { requestLeave, auth } = this.props;
+    const fromLeaveDate = moment(data.fromDate);
+    // const fromLeaveDate = moment(data.fromDate).format("MMM Do YYYY");
+    console.log("From leave date = " + fromLeaveDate);
+    const toLeaveDate = moment(data.toDate);
+    // const toLeaveDate = moment(data.toDate).format("MMM Do YYYY");
+    console.log("From leave date = " + fromLeaveDate);
 
     const leaveRequestData = {
       name: auth.user.name,
       fromEmail: auth.user.email,
       toEmail: data.approvedBy,
-      fromDate: data.fromDate,
-      toDate: data.toDate,
+      fromDate: fromLeaveDate,
+      toDate: toLeaveDate,
       leaveType: data.leaveType,
       comments: data.reason,
     };
@@ -89,7 +97,7 @@ class ManagerApplyLeave extends Component {
           <h3 style={{ marginBottom: "1em" }}>
             <b>Apply Leave</b>
           </h3>
-          <ActivateAccountForm
+          <ApplyLeaveForm
             onSubmit={(data) => this.onSubmit(data)}
             clearForm={this.state.clearForm}
             clearFormFunc={() => this.handleClearForm()}

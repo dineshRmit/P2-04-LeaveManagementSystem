@@ -8,6 +8,7 @@ const passport = require("passport");
 // Load input validation
 const validateRegisterInput = require("../../validation/register");
 const validateLoginInput = require("../../validation/login");
+const validatePasswordInput = require("../../validation/login");
 
 // Load User model
 const User = require("../../models/User");
@@ -52,6 +53,42 @@ router.post("/register", (req, res) => {
       });
     }
   });
+});
+
+// @route POST api/users/updatePassword
+// @desc Updates user password
+// @access Public
+router.post("/updatePassword", (req, res) => {
+  const { errors, isValid } = validatePasswordInput(req.body);
+
+  console.log(req.body);
+  // Check validation
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+
+  const email = req.body.email;
+  let newPassword = req.body.password;
+
+  // Hash password before saving in database
+  bcrypt.genSalt(10, (err, salt) => {
+    bcrypt.hash(newPassword, salt, (err, hash) => {
+      if (err) throw err;
+      newPassword = hash;
+    });
+  });
+
+  setTimeout(() => {
+    console.log(newPassword);
+    User.findOneAndUpdate({ email }, { password: newPassword }).then((user) => {
+      // Check if user exists
+      if (!user) {
+        return res.status(404).json({ emailnotfound: "Email not found" });
+      } else {
+        return res.json(user);
+      }
+    });
+  }, 1000);
 });
 
 // @route POST api/users/applyLeave

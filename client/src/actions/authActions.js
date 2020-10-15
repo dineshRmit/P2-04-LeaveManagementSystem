@@ -24,6 +24,28 @@ export const registerUser = (userData) => (dispatch) => {
   return promise;
 };
 
+//update password
+export const changePassword = (userData) => (dispatch) => {
+  console.log("Showing updated password");
+  console.log(userData);
+  var promise = axios
+    .post("/api/users/updatePassword", userData)
+    .then((res) => {
+      console.log("Changing password successful");
+      return true;
+    })
+    .catch((err) => {
+      console.log("Api un-successful");
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      });
+      return false;
+    });
+
+  return promise;
+};
+
 //Request leave
 export const requestLeave = (leaveData) => (dispatch) => {
   console.log("Printing the body of the req \n");

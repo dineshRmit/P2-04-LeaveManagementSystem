@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { withRouter } from "react-router";
 import { Layout, Breadcrumb } from "antd";
 import { connect } from "react-redux";
-import { updateUser } from "../../../../actions/authActions";
+import { changePassword } from "../../../../actions/authActions";
 import ActivateAccountForm from "./form";
 import styled from "styled-components";
 
@@ -29,17 +29,30 @@ class ChangePassword extends Component {
     });
   };
 
-  onSubmit = (data) => {
-    const { updateUser } = this.props;
+  onSubmit = (newPassword) => {
+    const { changePassword } = this.props;
 
-    updateUser(data).then((res) => {
-      console.log(res);
+    const newData = {
+      email: this.props.auth.user.email,
+      password: newPassword,
+    };
+
+    changePassword(newData).then((res) => {
       if (res == false) {
         this.handleErrorModalVisible();
       } else {
         this.handleModalVisible();
       }
     });
+
+    // updateUser(data).then((res) => {
+    //   console.log(res);
+    //   if (res == false) {
+    //     this.handleErrorModalVisible();
+    //   } else {
+    //     this.handleModalVisible();
+    //   }
+    // });
   };
 
   render() {
@@ -85,4 +98,4 @@ const mapStateToProps = (state) => ({
   errors: state.errors,
 });
 
-export default connect(mapStateToProps, { updateUser })(withRouter(ChangePassword));
+export default connect(mapStateToProps, { changePassword })(withRouter(ChangePassword));

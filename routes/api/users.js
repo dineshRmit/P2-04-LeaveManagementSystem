@@ -35,6 +35,7 @@ router.post("/register", (req, res) => {
         name: req.body.name,
         email: req.body.email,
         password: req.body.password,
+        reportingManager: req.body.reportingManager,
         userType1: req.body.userType1,
         userType2: req.body.userType2,
         userType3: req.body.userType3,
@@ -53,6 +54,14 @@ router.post("/register", (req, res) => {
       });
     }
   });
+
+  // User.findOne({ email: req.body.reportingManager }).then((user) => {
+  //   if (!user) {
+  //     return res.status(400).json({ email: "Reporting manager email id does not exists" });
+  //   } else {
+
+  //   }
+  // });
 });
 
 // @route POST api/users/updatePassword

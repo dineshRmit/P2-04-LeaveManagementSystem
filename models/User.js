@@ -15,6 +15,10 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
+  reportingManager: {
+    type: String,
+    required: true,
+  },
   userType1: {
     type: String,
     required: true,

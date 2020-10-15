@@ -27,6 +27,7 @@ class CreateAccount extends Component {
       //this.handleModalText(res[0]);
       if (res == false) {
         this.handleErrorModalVisible();
+        console.log(this.props.errors);
       } else {
         this.handleModalVisible();
       }
@@ -59,7 +60,11 @@ class CreateAccount extends Component {
           </h3>
           <Demo onSubmit={(data) => this.onSubmit(data)} />
           <ConfirmationModal visible={this.state.confirmationModalVisible} handleOk={() => this.handleModalVisible()} />
-          <ErrorModal visible={this.state.errorModalVisible} handleOk={() => this.handleErrorModalVisible()} />
+          <ErrorModal
+            errorText={this.props.errors.email}
+            visible={this.state.errorModalVisible}
+            handleOk={() => this.handleErrorModalVisible()}
+          />
         </StyledContent>
       </StyledLayout>
     );

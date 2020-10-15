@@ -38,6 +38,7 @@ const Demo = (props) => {
       email: values.user.email,
       password: values.password,
       password2: values.password,
+      reportingManager: values.reportingManager,
       userType1: firstAccountType,
       userType2: secondAccountType,
       userType3: thirdAccountType,
@@ -85,6 +86,10 @@ const Demo = (props) => {
         ]}
       >
         <Input.Password placeholder="Enter password" style={{ width: "200px" }} />
+      </Form.Item>
+
+      <Form.Item name="reportingManager" label="Reporting Manager" rules={[{ required: true }]}>
+        <Input placeholder="Enter email" style={{ width: "200px" }} />
       </Form.Item>
 
       <Form.Item

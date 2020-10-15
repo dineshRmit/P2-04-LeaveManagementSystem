@@ -3,7 +3,7 @@ import { WarningOutlined } from "@ant-design/icons";
 import { Modal, Button } from "antd";
 
 const ErrorModal = (props) => {
-  const { visible, handleOk } = props;
+  const { visible, handleOk, errorText } = props;
 
   return (
     <Modal
@@ -17,7 +17,7 @@ const ErrorModal = (props) => {
       ]}
     >
       <p>
-        <WarningOutlined twoToneColor="#eb2f96" /> Error creating new account.
+        <WarningOutlined twoToneColor="#eb2f96" /> {errorText}
       </p>
     </Modal>
   );

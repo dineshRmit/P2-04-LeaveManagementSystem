@@ -25,12 +25,22 @@ class Navbar extends Component {
     return (
       <Sider trigger={null} collapsible collapsed={this.props.collapsed}>
         <div className="logo" />
-        <Menu theme="dark" mode="inline" onSelect={this.handleMenuClick} defaultSelectedKeys={[lastPath]}>
+        <Menu
+          theme="dark"
+          mode="inline"
+          onSelect={this.handleMenuClick}
+          defaultOpenKeys={["sub1", "sub2"]}
+          defaultSelectedKeys={[lastPath]}
+        >
           <Menu.Item key="/admin/dashboard" icon={<DashboardOutlined />}>
             Dashboard
             <Link to="/admin/dashboard"></Link>
           </Menu.Item>
-          <SubMenu icon={<UserOutlined />} title="Accounts">
+          <SubMenu key="sub1" icon={<UserOutlined />} title="Accounts">
+            <Menu.Item key="/admin/accounts/viewAllUsers">
+              View all users
+              <Link to="/admin/accounts/viewAllUsers"></Link>
+            </Menu.Item>
             <Menu.Item key="/admin/accounts/createAccount">
               Create Account
               <Link to="/admin/accounts/createAccount"></Link>
@@ -43,16 +53,20 @@ class Navbar extends Component {
               Deactivate Account
               <Link to="/admin/accounts/deactivateAccount"></Link>
             </Menu.Item>
+            <Menu.Item key="/admin/accounts/changeAccountType">
+              Account Role
+              <Link to="/admin/accounts/changeAccountType"></Link>
+            </Menu.Item>
           </SubMenu>
 
-          <Menu.Item key="/admin/leaves" icon={<HomeOutlined />}>
+          {/* <Menu.Item key="/admin/leaves" icon={<HomeOutlined />}>
             Leaves
             <Link to="/admin/leaves"></Link>
           </Menu.Item>
           <Menu.Item key="/admin/calendar" icon={<CalendarOutlined />}>
             Calendar
             <Link to="/admin/calendar"></Link>
-          </Menu.Item>
+          </Menu.Item> */}
         </Menu>
       </Sider>
     );
@@ -62,21 +76,26 @@ class Navbar extends Component {
     return (
       <Sider trigger={null} collapsible collapsed={this.props.collapsed}>
         <div className="logo" />
-        <Menu theme="dark" mode="inline" onSelect={this.handleMenuClick} defaultSelectedKeys={[lastPath]}>
+        <Menu
+          theme="dark"
+          mode="inline"
+          onSelect={this.handleMenuClick}
+          defaultOpenKeys={["sub1", "sub2"]}
+          defaultSelectedKeys={[lastPath]}
+        >
           <Menu.Item key="/staff/dashboard" icon={<DashboardOutlined />}>
             Dashboard
             <Link to="/staff/dashboard"></Link>
           </Menu.Item>
 
-          {/* will require this later */}
-          {/* <SubMenu icon={<UserOutlined />} title="Accounts">
+          <SubMenu key="sub1" icon={<UserOutlined />} title="Accounts">
             <Menu.Item key="/staff/accounts/changePassword">
               Change password
               <Link to="/staff/accounts/changePassword"></Link>
             </Menu.Item>
-          </SubMenu> */}
+          </SubMenu>
 
-          <SubMenu icon={<HomeOutlined />} title="Leaves">
+          <SubMenu key="sub2" icon={<HomeOutlined />} title="Leaves">
             <Menu.Item key="/staff/leave/leaveBalance">
               View leave balance
               <Link to="/staff/leave/leaveBalance"></Link>

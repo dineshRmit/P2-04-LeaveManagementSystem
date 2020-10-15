@@ -195,16 +195,29 @@ router.post("/login", (req, res) => {
 // @access Public
 router.post("/updateUser", (req, res) => {
   const email = req.body.email;
-  const status = req.body.isAccountActive;
+  if (req.body.isAccountActive) {
+    const status = req.body.isAccountActive;
 
-  User.findOneAndUpdate({ email }, { isAccountActive: status }).then((user) => {
-    // Check if user exists
-    if (!user) {
-      return res.status(404).json({ emailnotfound: "Email not found" });
-    } else {
-      return res.json(user);
-    }
-  });
+    User.findOneAndUpdate({ email }, { isAccountActive: status }).then((user) => {
+      // Check if user exists
+      if (!user) {
+        return res.status(404).json({ emailnotfound: "Email not found" });
+      } else {
+        return res.json(user);
+      }
+    });
+  } else {
+    const accountType = req.body.accountType;
+
+    User.findOneAndUpdate({ email }, { userType1: accountType }).then((user) => {
+      // Check if user exists
+      if (!user) {
+        return res.status(404).json({ emailnotfound: "Email not found" });
+      } else {
+        return res.json(user);
+      }
+    });
+  }
 });
 
 // @route POST api/users/updateLeaveStatus

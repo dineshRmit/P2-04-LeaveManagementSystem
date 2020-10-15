@@ -1,13 +1,13 @@
 import React from "react";
-import { CheckCircleTwoTone } from "@ant-design/icons";
+import { WarningOutlined } from "@ant-design/icons";
 import { Modal, Button } from "antd";
 
-const ConfirmationModal = (props) => {
+const ErrorModal = (props) => {
   const { visible, handleOk } = props;
 
   return (
     <Modal
-      title="Success!"
+      title="Error!"
       visible={visible}
       onOk={() => handleOk()}
       footer={[
@@ -17,10 +17,10 @@ const ConfirmationModal = (props) => {
       ]}
     >
       <p>
-        <CheckCircleTwoTone twoToneColor="#52c41a" /> User role changed successfully!
+        <WarningOutlined style={{ color: "red" }} twoToneColor="#eb2f96" /> Error in changing role
       </p>
     </Modal>
   );
 };
 
-export default ConfirmationModal;
+export default ErrorModal;

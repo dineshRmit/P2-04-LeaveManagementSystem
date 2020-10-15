@@ -17,7 +17,7 @@ const ConfirmationModal = (props) => {
       ]}
     >
       <p>
-        <CheckCircleTwoTone twoToneColor="#52c41a" /> User role changed successfully!
+        <CheckCircleTwoTone twoToneColor="#52c41a" /> Password changed successfully!
       </p>
     </Modal>
   );

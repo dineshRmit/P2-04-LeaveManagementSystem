@@ -19,6 +19,7 @@ import Dashboard from "./components/dashboard/Dashboard";
 import "./App.css";
 import CreateAccount from "./components/pages/admin/accounts/createAccounts/createAccounts";
 import DeactivateAccount from "./components/pages/admin/accounts/deactivateAccounts/deactivateAccounts";
+import ChangeAccountType from "./components/pages/admin/accounts/changeAccountType/changeAccountType";
 import AdminOverview from "./components/pages/admin/overview/adminOverview";
 import AdminLeaves from "./components/pages/admin/leaves/adminLeaves";
 import AdminCalendar from "./components/pages/admin/calendar/adminCalendar";
@@ -26,6 +27,7 @@ import AdminCalendar from "./components/pages/admin/calendar/adminCalendar";
 import StaffDashboard from "./components/pages/staff/dashboard/staffDashboard";
 import StaffLeaveBalance from "./components/pages/staff/leaves/leaveBalance/staffLeaveBalance";
 import StaffApplyLeave from "./components/pages/staff/leaves/applyLeave/staffApplyLeave";
+import StaffChangePassword from "./components/pages/staff/accounts/changePassword";
 
 import ChangePassword from "./components/pages/manager/accounts/changePassword";
 import ManagerDashboard from "./components/pages/manager/dashboard/managerDashboard";
@@ -96,6 +98,7 @@ class Routes extends Component {
                 <PrivateRoute exact path="/admin/accounts/createAccount" component={CreateAccount} />
                 <PrivateRoute exact path="/admin/accounts/activateAccount" component={ActivateAccount} />
                 <PrivateRoute exact path="/admin/accounts/deactivateAccount" component={DeactivateAccount} />
+                <PrivateRoute exact path="/admin/accounts/changeAccountType" component={ChangeAccountType} />
                 <PrivateRoute exact path="/admin/leaves" component={AdminLeaves} />
                 <PrivateRoute exact path="/admin/calendar" component={AdminCalendar} />
 
@@ -103,6 +106,7 @@ class Routes extends Component {
                 <PrivateRoute exact path="/staff/dashboard" component={StaffDashboard} />
                 <PrivateRoute exact path="/staff/leave/leaveBalance" component={StaffLeaveBalance} />
                 <PrivateRoute exact path="/staff/leave/applyLeave" component={StaffApplyLeave} />
+                <PrivateRoute exact path="/staff/accounts/changePassword" component={StaffChangePassword} />
 
                 {/* Manager routes */}
                 <PrivateRoute exact path="/manager/dashboard" component={ManagerDashboard} />

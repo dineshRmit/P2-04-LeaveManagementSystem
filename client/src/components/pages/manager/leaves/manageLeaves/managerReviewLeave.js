@@ -2,7 +2,19 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import { Layout, Breadcrumb, Button } from "antd";
+
 import { getLeaveRequest } from "../../../../../actions/authActions";
+import {
+  updateUnpaidLeaveBalance,
+  updateParentalLeaveBalance,
+  updateSickLeaveWOCBalance,
+  updateSickLeaveWCBalance,
+  updateBloodDonorLeaveBalance,
+  updateCarersLeaveBalance,
+  updateAnnualLeaveBalance,
+  updateLeaveStatus,
+  findUserDetails,
+} from "../../../../../actions/authActions";
 
 import LeaveTable from "./leaveTable";
 import ConfirmationModal from "./confirmationModal";
@@ -19,11 +31,34 @@ class ManagerManageLeaves extends Component {
     confirmationModalVisible: false,
     errorModalVisible: false,
     errorMessage: undefined,
+    newLeaveBalanceState: {},
   };
 
   componentDidMount = () => {
     console.log(this.props.auth.user.email);
     this.fetchData(this.props.auth.user.email);
+    this.getLeaveBalance();
+  };
+
+  //get the latest leave balance hours
+  getLeaveBalance = () => {
+    const { findUserDetails } = this.props;
+
+    findUserDetails(this.props.auth.user.email)
+      .then((res) => {
+        if (res != false) {
+          this.setLeaveBalanceState(res.data);
+        }
+      })
+      .catch((err) => {
+        alert("Couldnt find new leave balance");
+      });
+  };
+
+  setLeaveBalanceState = (data) => {
+    this.setState({
+      newLeaveBalanceState: data,
+    });
   };
 
   handleModalVisible = () => {
@@ -33,7 +68,6 @@ class ManagerManageLeaves extends Component {
   };
 
   handleErrorModalVisible = () => {
-    console.log(this.props.errors);
     this.setState({
       errorModalVisible: !this.state.errorModalVisible,
     });
@@ -41,8 +75,8 @@ class ManagerManageLeaves extends Component {
 
   handleErrorMessage = () => {
     if (this.props.errors) {
-      if (this.props.errors.accountDeactivated) {
-        this.setErrorMessage(this.props.errors.accountDeactivated);
+      if (this.props.errors.emailnotfound) {
+        this.setErrorMessage(this.props.errors.emailnotfound);
       }
     }
   };
@@ -88,21 +122,150 @@ class ManagerManageLeaves extends Component {
     });
   };
 
-  //Referesh button
+  //Referesh buttons
   refreshList = () => {
     this.setLoadingState();
     this.fetchData(this.props.auth.user.email);
   };
 
-  handleAcceptButton = (fromDate, toDate, leaveType, id) => {
+  //handle accept button
+  handleAcceptButton = async (fromEmail, fromDate, toDate, leaveType, id) => {
+    const {
+      updateUnpaidLeaveBalance,
+      updateParentalLeaveBalance,
+      updateSickLeaveWOCBalance,
+      updateSickLeaveWCBalance,
+      updateBloodDonorLeaveBalance,
+      updateCarersLeaveBalance,
+      updateAnnualLeaveBalance,
+      updateLeaveStatus,
+    } = this.props;
+
     let hoursToDeduct = this.calculateNumberOfHours(fromDate, toDate, leaveType);
-    console.log("Displaying the hours to deduct " + hoursToDeduct);
-    let newLeaveBalanceHours = parseInt(this.props.auth.user.leave[`${leaveType}`]) - hoursToDeduct;
-    console.log("newLeaveBalanceHours " + newLeaveBalanceHours);
+
+    let currentLeaveBalance = parseInt(this.state.newLeaveBalanceState[`${leaveType}`]);
+    let newLeaveBalanceHours = currentLeaveBalance - hoursToDeduct;
+    if (newLeaveBalanceHours < 0) {
+      this.setErrorMessage("User does not have sufficient leave balance");
+      this.handleErrorModalVisible();
+    } else {
+      console.log("newLeaveBalanceHours " + newLeaveBalanceHours);
+
+      console.log(fromEmail);
+
+      let leaveBalanceData = {
+        userEmail: fromEmail,
+        leaveBalanceHours: newLeaveBalanceHours,
+      };
+
+      console.log(leaveType);
+
+      //for annual leave
+      if (leaveType === "annualLeave") {
+        updateAnnualLeaveBalance(leaveBalanceData).then((res) => {
+          console.log(res);
+          if (res == false) {
+            this.handleErrorMessage();
+            this.handleErrorModalVisible();
+          } else {
+            this.handleModalVisible();
+          }
+        });
+      } else if (leaveType === "carersLeave") {
+        updateCarersLeaveBalance(leaveBalanceData).then((res) => {
+          console.log(res);
+          if (res == false) {
+            this.handleErrorMessage();
+            this.handleErrorModalVisible();
+          } else {
+            this.handleModalVisible();
+          }
+        });
+      } else if (leaveType === "bloodDonorLeave") {
+        updateCarersLeaveBalance(leaveBalanceData).then((res) => {
+          console.log(res);
+          if (res == false) {
+            this.handleErrorMessage();
+            this.handleErrorModalVisible();
+          } else {
+            this.handleModalVisible();
+          }
+        });
+      } else if (leaveType === "sickLeaveWC") {
+        updateSickLeaveWCBalance(leaveBalanceData).then((res) => {
+          console.log(res);
+          if (res == false) {
+            this.handleErrorMessage();
+            this.handleErrorModalVisible();
+          } else {
+            this.handleModalVisible();
+          }
+        });
+      } else if (leaveType === "sickLeaveWOC") {
+        updateSickLeaveWOCBalance(leaveBalanceData).then((res) => {
+          console.log(res);
+          if (res == false) {
+            this.handleErrorMessage();
+            this.handleErrorModalVisible();
+          } else {
+            this.handleModalVisible();
+          }
+        });
+      } else if (leaveType === "parentalLeave") {
+        updateParentalLeaveBalance(leaveBalanceData).then((res) => {
+          console.log(res);
+          if (res == false) {
+            this.handleErrorMessage();
+            this.handleErrorModalVisible();
+          } else {
+            this.handleModalVisible();
+          }
+        });
+      } else if (leaveType === "unpaidLeave") {
+        updateUnpaidLeaveBalance(leaveBalanceData).then((res) => {
+          console.log(res);
+          if (res == false) {
+            this.handleErrorMessage();
+            this.handleErrorModalVisible();
+          } else {
+            this.handleModalVisible();
+          }
+        });
+      } else {
+        console.log(alert("Wrong leave type"));
+      }
+
+      //call to update status
+      this.updateLeaveStatus(id, "Approved");
+    }
   };
 
   handleRejectButton = (fromDate, toDate, leaveType, id) => {};
 
+  //update status
+  updateLeaveStatus = (leaveId, newStatus) => {
+    const { updateLeaveStatus } = this.props;
+
+    let leaveData = {
+      id: leaveId,
+      status: newStatus,
+    };
+
+    updateLeaveStatus(leaveData)
+      .then((res) => {
+        if (res == true) {
+          this.handleModalVisible();
+        } else {
+          this.handleErrorMessage();
+          this.handleErrorModalVisible();
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  //calculate number of hours
   calculateNumberOfHours = (fromDate, toDate, leaveType) => {
     let numberOfHoursofLeave = 0;
     let leaveHoursAvailable = parseInt(this.props.auth.user.leave[`${leaveType}`]);
@@ -144,8 +307,8 @@ class ManagerManageLeaves extends Component {
           <LeaveTable
             leaveData={this.state.leaveData}
             loading={this.state.loading}
-            handleAcceptButton={(fromDate, toDate, leaveType, id) =>
-              this.handleAcceptButton(fromDate, toDate, leaveType, id)
+            handleAcceptButton={(fromEmail, fromDate, toDate, leaveType, id) =>
+              this.handleAcceptButton(fromEmail, fromDate, toDate, leaveType, id)
             }
           />
           <ConfirmationModal visible={this.state.confirmationModalVisible} handleOk={() => this.handleModalVisible()} />
@@ -187,4 +350,15 @@ const mapStateToProps = (state) => ({
   errors: state.errors,
 });
 
-export default connect(mapStateToProps, { getLeaveRequest })(withRouter(ManagerManageLeaves));
+export default connect(mapStateToProps, {
+  findUserDetails,
+  getLeaveRequest,
+  updateUnpaidLeaveBalance,
+  updateParentalLeaveBalance,
+  updateSickLeaveWOCBalance,
+  updateSickLeaveWCBalance,
+  updateBloodDonorLeaveBalance,
+  updateCarersLeaveBalance,
+  updateAnnualLeaveBalance,
+  updateLeaveStatus,
+})(withRouter(ManagerManageLeaves));

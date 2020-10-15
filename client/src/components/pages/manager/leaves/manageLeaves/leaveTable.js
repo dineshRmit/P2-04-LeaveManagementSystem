@@ -39,7 +39,9 @@ const LeaveTable = (props) => {
       render: (record) => (
         <Button
           type="primary"
-          onClick={() => handleAcceptButton(record.fromDate, record.toDate, record.leaveType, record._id)}
+          onClick={() =>
+            handleAcceptButton(record.fromEmail, record.fromDate, record.toDate, record.leaveType, record._id)
+          }
         >
           Accept
         </Button>

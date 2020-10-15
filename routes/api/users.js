@@ -170,11 +170,139 @@ router.post("/updateUser", (req, res) => {
   });
 });
 
+// @route POST api/users/updateLeaveStatus
+// @desc Updates leave request status field
+// @access Public
+router.post("/updateLeaveStatus", (req, res) => {
+  console.log(req.body);
+  const id = req.body.id;
+  const status = req.body.status;
+
+  Leaves.findByIdAndUpdate({ _id: id }, { status: status }).then((leave) => {
+    // Check if user exists
+    if (!leave) {
+      return res.status(404).json({ leaveNotFound: "Leave does not exist" });
+    } else {
+      return res.json(leave);
+    }
+  });
+});
+
+//Update annual leave balance
+router.post("/updateAnnualLeaveBalance", (req, res) => {
+  const email = req.body.userEmail;
+  const updatedLeaveBalanceHours = req.body.leaveBalanceHours;
+
+  User.findOneAndUpdate({ email }, { annualLeave: updatedLeaveBalanceHours }).then((user) => {
+    // Check if user exists
+    if (!user) {
+      return res.status(404).json({ emailnotfound: "Email not found" });
+    } else {
+      return res.json(user);
+    }
+  });
+});
+
+//Update carers leave balance
+router.post("/updateCarersLeaveBalance", (req, res) => {
+  const email = req.body.userEmail;
+  const updatedLeaveBalanceHours = req.body.leaveBalanceHours;
+
+  User.findOneAndUpdate({ email }, { carersLeave: updatedLeaveBalanceHours }).then((user) => {
+    // Check if user exists
+    if (!user) {
+      return res.status(404).json({ emailnotfound: "Email not found" });
+    } else {
+      return res.json(user);
+    }
+  });
+});
+
+//Update blood donor leave balance
+router.post("/updateBloodDonorLeaveBalance", (req, res) => {
+  const email = req.body.userEmail;
+  const updatedLeaveBalanceHours = req.body.leaveBalanceHours;
+
+  User.findOneAndUpdate({ email }, { bloodDonorLeave: updatedLeaveBalanceHours }).then((user) => {
+    // Check if user exists
+    if (!user) {
+      return res.status(404).json({ emailnotfound: "Email not found" });
+    } else {
+      return res.json(user);
+    }
+  });
+});
+
+//Update SickLeaveWC leave balance
+router.post("/updateSickLeaveWCBalance", (req, res) => {
+  const email = req.body.userEmail;
+  const updatedLeaveBalanceHours = req.body.leaveBalanceHours;
+
+  User.findOneAndUpdate({ email }, { sickLeaveWC: updatedLeaveBalanceHours }).then((user) => {
+    // Check if user exists
+    if (!user) {
+      return res.status(404).json({ emailnotfound: "Email not found" });
+    } else {
+      return res.json(user);
+    }
+  });
+});
+
+//Update SickLeaveWOC leave balance
+router.post("/updateSickLeaveWOCBalance", (req, res) => {
+  const email = req.body.userEmail;
+  const updatedLeaveBalanceHours = req.body.leaveBalanceHours;
+
+  User.findOneAndUpdate({ email }, { sickLeaveWOC: updatedLeaveBalanceHours }).then((user) => {
+    // Check if user exists
+    if (!user) {
+      return res.status(404).json({ emailnotfound: "Email not found" });
+    } else {
+      return res.json(user);
+    }
+  });
+});
+
+//Update Parental Leave leave balance
+router.post("/updateParentalLeaveBalance", (req, res) => {
+  const email = req.body.userEmail;
+  const updatedLeaveBalanceHours = req.body.leaveBalanceHours;
+
+  User.findOneAndUpdate({ email }, { parentalLeave: updatedLeaveBalanceHours }).then((user) => {
+    // Check if user exists
+    if (!user) {
+      return res.status(404).json({ emailnotfound: "Email not found" });
+    } else {
+      return res.json(user);
+    }
+  });
+});
+
+//Update UnpaidLeave leave balance
+router.post("/updateUnpaidLeaveBalance", (req, res) => {
+  console.log("printing req.body");
+  console.log(req.body);
+  console.log(req.body.newLeaveBalanceHours);
+  const email = req.body.userEmail;
+  const updatedLeaveBalanceHours = req.body.leaveBalanceHours;
+
+  User.findOneAndUpdate({ email }, { unpaidLeave: updatedLeaveBalanceHours }).then((user) => {
+    // Check if user exists
+    if (!user) {
+      return res.status(404).json({ emailnotfound: "Email not found" });
+    } else {
+      return res.json(user);
+    }
+  });
+});
+
 // @route POST api/users/getUserDetails
 // @desc Gets users info
 // @access Public
-router.get("/getUserDetails", (req, res) => {
-  const email = req.body.email;
+router.get("/getUserDetails/:userEmail", (req, res) => {
+  console.log("displaying req,params in userEmail");
+  console.log(req.params);
+  const email = req.params.userEmail;
 
   User.findOne({ email }).then((user) => {
     if (!user) {
@@ -218,5 +346,4 @@ router.post("/updateLeaveRequest", (req, res) => {
     }
   });
 });
-
 module.exports = router;

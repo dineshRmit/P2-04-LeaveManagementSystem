@@ -66,9 +66,168 @@ export const updateUser = (userData) => (dispatch) => {
   return promise;
 };
 
-export const findUserDetails = (userData) => (dispatch) => {
+export const updateLeaveStatus = (leaveData) => (dispatch) => {
   var promise = axios
-    .get("/api/users/getUserDetails", userData)
+    .post("/api/users/updateLeaveStatus", leaveData)
+    .then((res) => {
+      console.log("Leave updated");
+      console.log(res);
+      return true;
+    })
+    .catch((err) => {
+      console.log("Leave update failed");
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      });
+      return false;
+    });
+  return promise;
+};
+
+//Update Annual leave balance
+export const updateAnnualLeaveBalance = (leaveBalanceData) => (dispatch) => {
+  var promise = axios
+    .post("/api/users/updateAnnualLeaveBalance", leaveBalanceData)
+    .then((res) => {
+      console.log("Leave balance updated");
+      console.log(res);
+      return true;
+    })
+    .catch((err) => {
+      console.log("Update user failed");
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      });
+      return false;
+    });
+  return promise;
+};
+
+//Update Carers leave balance
+export const updateCarersLeaveBalance = (leaveBalanceData) => (dispatch) => {
+  var promise = axios
+    .post("/api/users/updateCarersLeaveBalance", leaveBalanceData)
+    .then((res) => {
+      console.log("Leave balance updated");
+      console.log(res);
+      return true;
+    })
+    .catch((err) => {
+      console.log("Update user failed");
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      });
+      return false;
+    });
+  return promise;
+};
+
+//Update BloodDonor leave balance
+export const updateBloodDonorLeaveBalance = (leaveBalanceData) => (dispatch) => {
+  var promise = axios
+    .post("/api/users/updateBloodDonorLeaveBalance", leaveBalanceData)
+    .then((res) => {
+      console.log("Leave balance updated");
+      console.log(res);
+      return true;
+    })
+    .catch((err) => {
+      console.log("Update user failed");
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      });
+      return false;
+    });
+  return promise;
+};
+
+//Update SickLeaveWC leave balance
+export const updateSickLeaveWCBalance = (leaveBalanceData) => (dispatch) => {
+  var promise = axios
+    .post("/api/users/updateSickLeaveWCBalance", leaveBalanceData)
+    .then((res) => {
+      console.log("Leave balance updated");
+      console.log(res);
+      return true;
+    })
+    .catch((err) => {
+      console.log("Update user failed");
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      });
+      return false;
+    });
+  return promise;
+};
+
+//Update SickLeaveWOC leave balance
+export const updateSickLeaveWOCBalance = (leaveBalanceData) => (dispatch) => {
+  var promise = axios
+    .post("/api/users/updateSickLeaveWOCBalance", leaveBalanceData)
+    .then((res) => {
+      console.log("Leave balance updated");
+      console.log(res);
+      return true;
+    })
+    .catch((err) => {
+      console.log("Update user failed");
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      });
+      return false;
+    });
+  return promise;
+};
+
+//Update ParentalLeave leave balance
+export const updateParentalLeaveBalance = (leaveBalanceData) => (dispatch) => {
+  var promise = axios
+    .post("/api/users/updateParentalLeaveBalance", leaveBalanceData)
+    .then((res) => {
+      console.log("Leave balance updated");
+      console.log(res);
+      return true;
+    })
+    .catch((err) => {
+      console.log("Update user failed");
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      });
+      return false;
+    });
+  return promise;
+};
+
+//Update UnpaidLeave leave balance
+export const updateUnpaidLeaveBalance = (leaveBalanceData) => (dispatch) => {
+  var promise = axios
+    .post("/api/users/updateUnpaidLeaveBalance", leaveBalanceData)
+    .then((res) => {
+      console.log("Leave balance updated");
+      console.log(res);
+      return true;
+    })
+    .catch((err) => {
+      console.log("Update user failed");
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      });
+      return false;
+    });
+  return promise;
+};
+
+export const findUserDetails = (userEmail) => (dispatch) => {
+  var promise = axios
+    .get(`/api/users/getUserDetails/${userEmail}`)
     .then((res) => {
       console.log("Getting user data" + res);
       return res;
@@ -150,6 +309,11 @@ export const loginUser = (userData) => (dispatch) => {
         payload: err.response.data,
       })
     );
+};
+
+export const updateReduxStore = (newData) => (dispatch) => {
+  console.log("Displaying the update redux data" + newData);
+  //dispatch(setCurrentUser(newData));
 };
 
 // Set logged in user

@@ -17,7 +17,7 @@ const ConfirmationModal = (props) => {
       ]}
     >
       <p>
-        <CheckCircleTwoTone twoToneColor="#52c41a" /> Leave successfully applied!
+        <CheckCircleTwoTone twoToneColor="#52c41a" /> Leave successfully applied! Please refresh to see updated changes.
       </p>
     </Modal>
   );

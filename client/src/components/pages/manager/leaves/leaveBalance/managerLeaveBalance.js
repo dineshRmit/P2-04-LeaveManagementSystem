@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
-import { Layout, Breadcrumb } from "antd";
+import { Layout, Breadcrumb, Spin } from "antd";
 import { Row, Col } from "antd";
 import { Table } from "antd";
 import styled from "styled-components";
+
+import { findUserDetails } from "../../../../../actions/authActions";
 
 const { Content } = Layout;
 
@@ -28,19 +30,52 @@ class ManagerLeaveBalance extends Component {
     sickLeaveNoCertBalance: this.props.auth.user.leave.sickLeaveWOC,
     parentalLeaveBalance: this.props.auth.user.leave.parentalLeave,
     unpaidLeaveBalance: this.props.auth.user.leave.unpaidLeave,
+    spinState: true,
   };
 
-  componentDidMount = () => {};
+  componentDidMount = () => {
+    this.findLeaveBalance();
+  };
+
+  findLeaveBalance = () => {
+    const { findUserDetails } = this.props;
+
+    let userData = {
+      email: this.props.auth.user.email,
+    };
+
+    findUserDetails(this.props.auth.user.email)
+      .then((res) => {
+        if (res != false) {
+          this.setLeaveBalance(res.data);
+        }
+      })
+      .catch((err) => {
+        console.log("Couldnt find new leave balance");
+        this.setSpinState();
+      });
+  };
 
   setLeaveBalance = (leaveBalanceData) => {
+    this.setState(
+      {
+        annualLeaveBalance: leaveBalanceData.annualLeave,
+        carerLeaveBalance: leaveBalanceData.carersLeave,
+        bloodDonorLeaveBalance: leaveBalanceData.bloodDonorLeave,
+        sickLeaveCertBalance: leaveBalanceData.sickLeaveWC,
+        sickLeaveNoCertBalance: leaveBalanceData.sickLeaveWOC,
+        parentalLeaveBalance: leaveBalanceData.parentalLeave,
+        unpaidLeaveBalance: leaveBalanceData.unpaidLeave,
+      },
+      () => {
+        this.setSpinState();
+      }
+    );
+  };
+
+  setSpinState = () => {
     this.setState({
-      annualLeaveBalance: leaveBalanceData.annualLeave,
-      carerLeaveBalance: leaveBalanceData.carerLeave,
-      bloodDonorLeaveBalance: leaveBalanceData.bloodDonorLeave,
-      sickLeaveCertBalance: leaveBalanceData.sickCertLeave,
-      sickLeaveNoCertBalance: leaveBalanceData.sickNoCertLeave,
-      parentalLeaveBalance: leaveBalanceData.parentalLeave,
-      unpaidLeaveBalance: leaveBalanceData.unpaidLeave,
+      spinState: !this.state.spinState,
     });
   };
 
@@ -94,9 +129,11 @@ class ManagerLeaveBalance extends Component {
           <h3 style={{ marginBottom: "1em" }}>
             <b>Leave Balance</b>
           </h3>
-          <TableDiv>
-            <StyledTable columns={columns} dataSource={data} size="small" />
-          </TableDiv>
+          <Spin spinning={this.state.spinState}>
+            <TableDiv>
+              <StyledTable columns={columns} dataSource={data} size="small" />
+            </TableDiv>
+          </Spin>
         </StyledContent>
       </StyledLayout>
     );
@@ -135,4 +172,4 @@ const mapStateToProps = (state) => ({
   errors: state.errors,
 });
 
-export default connect(mapStateToProps, {})(withRouter(ManagerLeaveBalance));
+export default connect(mapStateToProps, { findUserDetails })(withRouter(ManagerLeaveBalance));

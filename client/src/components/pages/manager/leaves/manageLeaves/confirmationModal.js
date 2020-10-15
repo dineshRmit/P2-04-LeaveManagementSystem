@@ -3,13 +3,16 @@ import { CheckCircleTwoTone } from "@ant-design/icons";
 import { Modal, Button } from "antd";
 
 const ConfirmationModal = (props) => {
-  const { visible, handleOk } = props;
+  const { visible, handleOk, refreshList, successMessage } = props;
 
   return (
     <Modal
       title="Success!"
       visible={visible}
-      onOk={() => handleOk()}
+      onOk={() => {
+        refreshList();
+        handleOk();
+      }}
       footer={[
         <Button key="submit" type="primary" onClick={() => handleOk()}>
           Ok
@@ -17,7 +20,7 @@ const ConfirmationModal = (props) => {
       ]}
     >
       <p>
-        <CheckCircleTwoTone twoToneColor="#52c41a" /> Leave successfully applied! Please refresh to see updated changes.
+        <CheckCircleTwoTone twoToneColor="#52c41a" /> {successMessage}
       </p>
     </Modal>
   );

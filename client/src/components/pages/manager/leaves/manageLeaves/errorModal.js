@@ -3,15 +3,24 @@ import { WarningOutlined } from "@ant-design/icons";
 import { Modal, Button } from "antd";
 
 const ErrorModal = (props) => {
-  const { visible, handleOk, errorMessage } = props;
+  const { visible, handleOk, errorMessage, refreshList } = props;
 
   return (
     <Modal
       title="Error!"
       visible={visible}
-      onOk={() => handleOk()}
+      onOk={() => {
+        refreshList();
+        handleOk();
+      }}
       footer={[
-        <Button key="submit" type="primary" onClick={() => handleOk()}>
+        <Button
+          key="submit"
+          type="primary"
+          onClick={() => {
+            handleOk();
+          }}
+        >
           Ok
         </Button>,
       ]}

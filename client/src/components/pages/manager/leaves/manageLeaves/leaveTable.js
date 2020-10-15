@@ -1,9 +1,23 @@
 import React, { useState } from "react";
 import { Table, Button } from "antd";
+import moment from "moment";
+
 const { Column, ColumnGroup } = Table;
 
 const LeaveTable = (props) => {
-  const { leaveData, loading, handleAcceptButton } = props;
+  const { leaveData, loading, handleAcceptButton, handleRejectButton, disableActionButtonsIds } = props;
+
+  const handleDisableButton = (recordId, recordStatus) => {
+    let temp = new Array();
+    temp = disableActionButtonsIds;
+
+    if (temp.includes(recordId) == true || recordStatus != "Pending") {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   const columns = [
     {
       title: () => <b>{"Name"}</b>,
@@ -17,10 +31,12 @@ const LeaveTable = (props) => {
     {
       title: () => <b>{"From"}</b>,
       dataIndex: "fromDate",
+      render: (text) => moment(text).format("MMM Do YYYY"),
     },
     {
       title: () => <b>{"To"}</b>,
       dataIndex: "toDate",
+      render: (text) => moment(text).format("MMM Do YYYY"),
     },
     {
       title: () => <b>{"Leave Type"}</b>,
@@ -42,6 +58,7 @@ const LeaveTable = (props) => {
           onClick={() =>
             handleAcceptButton(record.fromEmail, record.fromDate, record.toDate, record.leaveType, record._id)
           }
+          disabled={handleDisableButton(record._id, record.status)}
         >
           Accept
         </Button>
@@ -50,7 +67,12 @@ const LeaveTable = (props) => {
     {
       title: () => <b>{"Reject"}</b>,
       render: (record) => (
-        <Button type="primary" danger onClick={() => console.log(JSON.stringify(record._id))}>
+        <Button
+          type="primary"
+          danger
+          onClick={() => handleRejectButton(record._id)}
+          disabled={handleDisableButton(record._id, record.status)}
+        >
           Reject
         </Button>
       ),

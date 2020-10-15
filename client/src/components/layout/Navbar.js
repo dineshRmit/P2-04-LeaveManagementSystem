@@ -99,18 +99,24 @@ class Navbar extends Component {
     return (
       <Sider trigger={null} collapsible collapsed={this.props.collapsed}>
         <div className="logo" />
-        <Menu theme="dark" mode="inline" onSelect={this.handleMenuClick} defaultSelectedKeys={[lastPath]}>
+        <Menu
+          theme="dark"
+          mode="inline"
+          onSelect={this.handleMenuClick}
+          defaultOpenKeys={["sub1", "sub2"]}
+          defaultSelectedKeys={[lastPath]}
+        >
           <Menu.Item key="/manager/dashboard" icon={<DashboardOutlined />}>
             Dashboard
             <Link to="/manager/dashboard"></Link>
           </Menu.Item>
-          <SubMenu icon={<UserOutlined />} title="Accounts">
+          <SubMenu key="sub1" icon={<UserOutlined />} title="Accounts">
             <Menu.Item key="/manager/accounts/changePassword">
               Change password
               <Link to="/manager/accounts/changePassword"></Link>
             </Menu.Item>
           </SubMenu>
-          <SubMenu icon={<HomeOutlined />} title="Leaves">
+          <SubMenu key="sub2" icon={<HomeOutlined />} title="Leaves">
             <Menu.Item key="/manager/leave/leaveBalance">
               View leave balance
               <Link to="/manager/leave/leaveBalance"></Link>

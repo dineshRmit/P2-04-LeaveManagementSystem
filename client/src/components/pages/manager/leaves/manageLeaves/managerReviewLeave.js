@@ -32,12 +32,31 @@ class ManagerManageLeaves extends Component {
     errorModalVisible: false,
     errorMessage: undefined,
     newLeaveBalanceState: {},
+    successMessage: undefined,
+    rejectedMessage: undefined,
+    disableActionButtonsIds: new Array(),
   };
 
   componentDidMount = () => {
     console.log(this.props.auth.user.email);
     this.fetchData(this.props.auth.user.email);
     this.getLeaveBalance();
+  };
+
+  //pushed id into the array to disable array
+  addDisableActionButtonsIds = (id) => {
+    let temp = new Array();
+    temp = this.state.disableActionButtonsIds;
+
+    temp.push(id);
+    this.setState(
+      {
+        disableActionButtonsIds: temp,
+      },
+      () => {
+        console.log(this.state.disableActionButtonsIds);
+      }
+    );
   };
 
   //get the latest leave balance hours
@@ -62,15 +81,29 @@ class ManagerManageLeaves extends Component {
   };
 
   handleModalVisible = () => {
-    this.setState({
-      confirmationModalVisible: !this.state.confirmationModalVisible,
-    });
+    this.setState(
+      {
+        confirmationModalVisible: !this.state.confirmationModalVisible,
+      },
+      () => {
+        if (this.state.confirmationModalVisible == false) {
+          this.refreshList();
+        }
+      }
+    );
   };
 
   handleErrorModalVisible = () => {
-    this.setState({
-      errorModalVisible: !this.state.errorModalVisible,
-    });
+    this.setState(
+      {
+        errorModalVisible: !this.state.errorModalVisible,
+      },
+      () => {
+        if (this.state.errorModalVisible == false) {
+          this.refreshList();
+        }
+      }
+    );
   };
 
   handleErrorMessage = () => {
@@ -168,7 +201,7 @@ class ManagerManageLeaves extends Component {
             this.handleErrorMessage();
             this.handleErrorModalVisible();
           } else {
-            this.handleModalVisible();
+            this.setSuccessMessage("Leave successfully applied!");
           }
         });
       } else if (leaveType === "carersLeave") {
@@ -178,17 +211,17 @@ class ManagerManageLeaves extends Component {
             this.handleErrorMessage();
             this.handleErrorModalVisible();
           } else {
-            this.handleModalVisible();
+            this.setSuccessMessage("Leave successfully applied!");
           }
         });
       } else if (leaveType === "bloodDonorLeave") {
-        updateCarersLeaveBalance(leaveBalanceData).then((res) => {
+        updateBloodDonorLeaveBalance(leaveBalanceData).then((res) => {
           console.log(res);
           if (res == false) {
             this.handleErrorMessage();
             this.handleErrorModalVisible();
           } else {
-            this.handleModalVisible();
+            this.setSuccessMessage("Leave successfully applied!");
           }
         });
       } else if (leaveType === "sickLeaveWC") {
@@ -198,7 +231,7 @@ class ManagerManageLeaves extends Component {
             this.handleErrorMessage();
             this.handleErrorModalVisible();
           } else {
-            this.handleModalVisible();
+            this.setSuccessMessage("Leave successfully applied!");
           }
         });
       } else if (leaveType === "sickLeaveWOC") {
@@ -208,7 +241,7 @@ class ManagerManageLeaves extends Component {
             this.handleErrorMessage();
             this.handleErrorModalVisible();
           } else {
-            this.handleModalVisible();
+            this.setSuccessMessage("Leave successfully applied!");
           }
         });
       } else if (leaveType === "parentalLeave") {
@@ -218,7 +251,7 @@ class ManagerManageLeaves extends Component {
             this.handleErrorMessage();
             this.handleErrorModalVisible();
           } else {
-            this.handleModalVisible();
+            this.setSuccessMessage("Leave successfully applied!");
           }
         });
       } else if (leaveType === "unpaidLeave") {
@@ -228,7 +261,7 @@ class ManagerManageLeaves extends Component {
             this.handleErrorMessage();
             this.handleErrorModalVisible();
           } else {
-            this.handleModalVisible();
+            this.setSuccessMessage("Leave successfully applied!");
           }
         });
       } else {
@@ -240,7 +273,11 @@ class ManagerManageLeaves extends Component {
     }
   };
 
-  handleRejectButton = (fromDate, toDate, leaveType, id) => {};
+  handleRejectButton = (id) => {
+    //update status to say rejected
+    this.setSuccessMessage("Leave successfully rejected!");
+    this.updateLeaveStatus(id, "Rejected");
+  };
 
   //update status
   updateLeaveStatus = (leaveId, newStatus) => {
@@ -254,9 +291,10 @@ class ManagerManageLeaves extends Component {
     updateLeaveStatus(leaveData)
       .then((res) => {
         if (res == true) {
+          this.addDisableActionButtonsIds(leaveId);
           this.handleModalVisible();
         } else {
-          this.handleErrorMessage();
+          this.setErrorMessage("Error changing the status");
           this.handleErrorModalVisible();
         }
       })
@@ -288,6 +326,12 @@ class ManagerManageLeaves extends Component {
     }
   };
 
+  setSuccessMessage = (text) => {
+    this.setState({
+      successMessage: text,
+    });
+  };
+
   render() {
     return (
       <StyledLayout>
@@ -310,12 +354,20 @@ class ManagerManageLeaves extends Component {
             handleAcceptButton={(fromEmail, fromDate, toDate, leaveType, id) =>
               this.handleAcceptButton(fromEmail, fromDate, toDate, leaveType, id)
             }
+            handleRejectButton={(id) => this.handleRejectButton(id)}
+            disableActionButtonsIds={this.state.disableActionButtonsIds}
           />
-          <ConfirmationModal visible={this.state.confirmationModalVisible} handleOk={() => this.handleModalVisible()} />
+          <ConfirmationModal
+            visible={this.state.confirmationModalVisible}
+            handleOk={() => this.handleModalVisible()}
+            refreshList={() => this.refreshList()}
+            successMessage={this.state.successMessage}
+          />
           <ErrorModal
             visible={this.state.errorModalVisible}
             handleOk={() => this.handleErrorModalVisible()}
             errorMessage={this.state.errorMessage}
+            refreshList={() => this.refreshList()}
           />
         </StyledContent>
       </StyledLayout>

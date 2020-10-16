@@ -285,6 +285,45 @@ export const getLeaveRequest = (managerEmail) => (dispatch) => {
   return promise;
 };
 
+//Get all reporting manager user details
+export const getAllStaffUsers = (reportingManager) => (dispatch) => {
+  console.log(reportingManager);
+  var promise = axios
+    .get(`/api/users/getAllStaffUsers/${reportingManager}`)
+    .then((res) => {
+      console.log("Getting leave data" + res);
+      return res;
+    })
+    .catch((err) => {
+      console.log("Getting leave data failed");
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      });
+      return false;
+    });
+  return promise;
+};
+
+//Get all user for admin
+export const getAllUsers = () => (dispatch) => {
+  var promise = axios
+    .get(`/api/users/getAllUsers`)
+    .then((res) => {
+      console.log("Getting leave data" + res);
+      return res;
+    })
+    .catch((err) => {
+      console.log("Getting leave data failed");
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      });
+      return false;
+    });
+  return promise;
+};
+
 // Update Leave request
 export const updateLeaveRequest = (leaveRequestID) => (dispatch) => {
   var promise = axios

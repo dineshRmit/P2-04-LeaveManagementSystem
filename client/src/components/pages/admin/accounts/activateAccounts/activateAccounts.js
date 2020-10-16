@@ -54,6 +54,9 @@ class ActivateAccount extends Component {
           <h3 style={{ marginBottom: "1em" }}>
             <b>Activate Account</b>
           </h3>
+          <p style={{ color: "GrayText" }}>
+            <i>Enter the email of the user you want to activate account. </i>
+          </p>
           <ActivateAccountForm onSubmit={(data) => this.onSubmit(data)} />
           <ConfirmationModal visible={this.state.confirmationModalVisible} handleOk={() => this.handleModalVisible()} />
           <ErrorModal visible={this.state.errorModalVisible} handleOk={() => this.handleErrorModalVisible()} />

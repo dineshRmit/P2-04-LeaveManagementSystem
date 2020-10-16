@@ -58,6 +58,9 @@ class CreateAccount extends Component {
           <h3 style={{ marginBottom: "1em" }}>
             <b>Create Account</b>
           </h3>
+          <p style={{ color: "GrayText" }}>
+            <i>Enter the details to create a new account. </i>
+          </p>
           <Demo onSubmit={(data) => this.onSubmit(data)} />
           <ConfirmationModal visible={this.state.confirmationModalVisible} handleOk={() => this.handleModalVisible()} />
           <ErrorModal

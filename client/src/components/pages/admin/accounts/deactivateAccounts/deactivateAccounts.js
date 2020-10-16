@@ -55,6 +55,9 @@ class DeactivateAccount extends Component {
           <h3 style={{ marginBottom: "1em" }}>
             <b>Deactivate Account</b>
           </h3>
+          <p style={{ color: "GrayText" }}>
+            <i>Enter the email of the user to deactivate their account. </i>
+          </p>
           <DeactivateAccountForm onSubmit={(data) => this.onSubmit(data)} />
           <ConfirmationModal visible={this.state.confirmationModalVisible} handleOk={() => this.handleModalVisible()} />
           <ErrorModal visible={this.state.errorModalVisible} handleOk={() => this.handleErrorModalVisible()} />

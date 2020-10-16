@@ -203,9 +203,13 @@ router.post("/login", (req, res) => {
 // @desc Updates user's active field
 // @access Public
 router.post("/updateUser", (req, res) => {
+  console.log(req.body);
   const email = req.body.email;
-  if (req.body.isAccountActive) {
+  console.log("Inside update user api");
+
+  if (req.body.isAccountActive == true || req.body.isAccountActive == false) {
     const status = req.body.isAccountActive;
+    console.log(status);
 
     User.findOneAndUpdate({ email }, { isAccountActive: status }).then((user) => {
       // Check if user exists
@@ -217,6 +221,7 @@ router.post("/updateUser", (req, res) => {
     });
   } else {
     const accountType = req.body.accountType;
+    console.log("Inside account type ");
 
     User.findOneAndUpdate({ email }, { userType1: accountType }).then((user) => {
       // Check if user exists
@@ -385,6 +390,36 @@ router.get("/getLeaveRequest/:managerEmail", (req, res) => {
       return res.status(404).json({ noRequestExists: "No Leave request to display" });
     } else {
       return res.json(leaveRequest);
+    }
+  });
+});
+
+// @route GET api/users/getAllStaffUsers/:managerEmail
+// @desc Gets all users whose reporting manager matches
+// @access Public
+router.get("/getAllStaffUsers/:managerEmail", (req, res) => {
+  console.log("Displaying req.params");
+  console.log(req.params);
+  const managerEmail = req.params.managerEmail;
+
+  User.find({ reportingManager: managerEmail }).then((user) => {
+    if (!user) {
+      return res.status(404).json({ noStaffExists: "No staff reports to you yet." });
+    } else {
+      return res.json(user);
+    }
+  });
+});
+
+// @route GET api/users/getAllUsers/
+// @desc Gets all users used by admin
+// @access Public
+router.get("/getAllUsers/", (req, res) => {
+  User.find().then((user) => {
+    if (!user) {
+      return res.status(404).json({ noStaffExists: "No users exists" });
+    } else {
+      return res.json(user);
     }
   });
 });

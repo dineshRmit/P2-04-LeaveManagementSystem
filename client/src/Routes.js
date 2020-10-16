@@ -20,6 +20,7 @@ import "./App.css";
 import CreateAccount from "./components/pages/admin/accounts/createAccounts/createAccounts";
 import DeactivateAccount from "./components/pages/admin/accounts/deactivateAccounts/deactivateAccounts";
 import ChangeAccountType from "./components/pages/admin/accounts/changeAccountType/changeAccountType";
+import ViewAllUsers from "./components/pages/admin/accounts/viewAllUsers/viewAllUsers";
 import AdminOverview from "./components/pages/admin/overview/adminOverview";
 import AdminLeaves from "./components/pages/admin/leaves/adminLeaves";
 import AdminCalendar from "./components/pages/admin/calendar/adminCalendar";
@@ -99,6 +100,7 @@ class Routes extends Component {
                 <PrivateRoute exact path="/admin/accounts/activateAccount" component={ActivateAccount} />
                 <PrivateRoute exact path="/admin/accounts/deactivateAccount" component={DeactivateAccount} />
                 <PrivateRoute exact path="/admin/accounts/changeAccountType" component={ChangeAccountType} />
+                <PrivateRoute exact path="/admin/accounts/viewAllUsers" component={ViewAllUsers} />
                 <PrivateRoute exact path="/admin/leaves" component={AdminLeaves} />
                 <PrivateRoute exact path="/admin/calendar" component={AdminCalendar} />
 

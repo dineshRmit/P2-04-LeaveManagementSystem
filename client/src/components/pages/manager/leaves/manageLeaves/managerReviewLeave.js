@@ -201,7 +201,7 @@ class ManagerManageLeaves extends Component {
             this.handleErrorMessage();
             this.handleErrorModalVisible();
           } else {
-            this.setSuccessMessage("Leave successfully applied!");
+            this.setSuccessMessage("Leave accepted!");
           }
         });
       } else if (leaveType === "carersLeave") {
@@ -211,7 +211,7 @@ class ManagerManageLeaves extends Component {
             this.handleErrorMessage();
             this.handleErrorModalVisible();
           } else {
-            this.setSuccessMessage("Leave successfully applied!");
+            this.setSuccessMessage("Leave accepted!");
           }
         });
       } else if (leaveType === "bloodDonorLeave") {
@@ -221,7 +221,7 @@ class ManagerManageLeaves extends Component {
             this.handleErrorMessage();
             this.handleErrorModalVisible();
           } else {
-            this.setSuccessMessage("Leave successfully applied!");
+            this.setSuccessMessage("Leave accepted!");
           }
         });
       } else if (leaveType === "sickLeaveWC") {
@@ -231,7 +231,7 @@ class ManagerManageLeaves extends Component {
             this.handleErrorMessage();
             this.handleErrorModalVisible();
           } else {
-            this.setSuccessMessage("Leave successfully applied!");
+            this.setSuccessMessage("Leave accepted!");
           }
         });
       } else if (leaveType === "sickLeaveWOC") {
@@ -241,7 +241,7 @@ class ManagerManageLeaves extends Component {
             this.handleErrorMessage();
             this.handleErrorModalVisible();
           } else {
-            this.setSuccessMessage("Leave successfully applied!");
+            this.setSuccessMessage("Leave accepted!");
           }
         });
       } else if (leaveType === "parentalLeave") {
@@ -251,7 +251,7 @@ class ManagerManageLeaves extends Component {
             this.handleErrorMessage();
             this.handleErrorModalVisible();
           } else {
-            this.setSuccessMessage("Leave successfully applied!");
+            this.setSuccessMessage("Leave accepted!");
           }
         });
       } else if (leaveType === "unpaidLeave") {
@@ -261,7 +261,7 @@ class ManagerManageLeaves extends Component {
             this.handleErrorMessage();
             this.handleErrorModalVisible();
           } else {
-            this.setSuccessMessage("Leave successfully applied!");
+            this.setSuccessMessage("Leave accepted!");
           }
         });
       } else {

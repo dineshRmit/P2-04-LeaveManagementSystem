@@ -29,12 +29,6 @@ const UsersTable = (props) => {
       key: "userType1",
     },
     {
-      title: () => <b>{"Account Active"}</b>,
-      dataIndex: "isAccountActive",
-      key: "isAccountActive",
-      render: (text) => <span style={{ textAlign: "center" }}>{`${text}`}</span>,
-    },
-    {
       title: () => <b>{"Leave Balance"}</b>,
       children: [
         {
@@ -68,12 +62,6 @@ const UsersTable = (props) => {
           key: "unpaidLeave",
         },
       ],
-    },
-    {
-      title: () => <b>{"Date Created"}</b>,
-      dataIndex: "date",
-      render: (text) => moment(text).format("MMM Do YYYY"),
-      key: "date",
     },
 
     // {

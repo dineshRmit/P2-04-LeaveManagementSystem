@@ -21,7 +21,8 @@ const Leaves = require("../../models/Leaves");
 // @access Public
 router.post("/register", (req, res) => {
   const { errors, isValid } = validateRegisterInput(req.body);
-
+  console.log("Printing req.body in register");
+  console.log(req.body);
   // Check validation
   if (!isValid) {
     return res.status(400).json(errors);
@@ -164,6 +165,7 @@ router.post("/login", (req, res) => {
             id: user.id,
             name: user.name,
             email: user.email,
+            reportingManager: user.reportingManager,
             userType1: user.userType1,
             userType2: user.userType2,
             userType3: user.userType3,
@@ -416,6 +418,16 @@ router.get("/getAllStaffUsers/:managerEmail", (req, res) => {
 // @access Public
 router.get("/getAllUsers/", (req, res) => {
   User.find().then((user) => {
+    if (!user) {
+      return res.status(404).json({ noStaffExists: "No users exists" });
+    } else {
+      return res.json(user);
+    }
+  });
+});
+
+router.post("/deleteUser", (req, res) => {
+  User.deleteOne({ email: req.body.email }).then((user) => {
     if (!user) {
       return res.status(404).json({ noStaffExists: "No users exists" });
     } else {

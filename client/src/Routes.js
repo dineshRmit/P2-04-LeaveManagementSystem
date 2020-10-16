@@ -19,6 +19,7 @@ import Dashboard from "./components/dashboard/Dashboard";
 import "./App.css";
 import CreateAccount from "./components/pages/admin/accounts/createAccounts/createAccounts";
 import DeactivateAccount from "./components/pages/admin/accounts/deactivateAccounts/deactivateAccounts";
+import ActivateAccount from "./components/pages/admin/accounts/activateAccounts/activateAccounts";
 import ChangeAccountType from "./components/pages/admin/accounts/changeAccountType/changeAccountType";
 import ViewAllUsers from "./components/pages/admin/accounts/viewAllUsers/viewAllUsers";
 import AdminOverview from "./components/pages/admin/overview/adminOverview";
@@ -35,7 +36,7 @@ import ManagerDashboard from "./components/pages/manager/dashboard/managerDashbo
 import ManagerApplyLeave from "./components/pages/manager/leaves/applyLeave/managerApplyLeave";
 import ManagerLeaveBalance from "./components/pages/manager/leaves/leaveBalance/managerLeaveBalance";
 import ManagerManageLeaves from "./components/pages/manager/leaves/manageLeaves/managerReviewLeave";
-import ActivateAccount from "./components/pages/admin/accounts/activateAccounts/activateAccounts";
+import ViewAllStaffUsers from "./components/pages/manager/staff/viewAllUsers/viewAllUsers";
 
 const { Header, Sider, Content, Footer } = Layout;
 
@@ -116,6 +117,7 @@ class Routes extends Component {
                 <PrivateRoute exact path="/manager/leave/leaveBalance" component={ManagerLeaveBalance} />
                 <PrivateRoute exact path="/manager/leave/applyLeave" component={ManagerApplyLeave} />
                 <PrivateRoute exact path="/manager/leave/manageLeaves" component={ManagerManageLeaves} />
+                <PrivateRoute exact path="/manager/staff/viewAllStaff" component={ViewAllStaffUsers} />
               </Switch>
             </Content>
             <StyledFooter className="layout-footer">SEPM - Group P2-04 </StyledFooter>

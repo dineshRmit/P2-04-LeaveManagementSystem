@@ -58,7 +58,7 @@ class StaffApplyLeave extends Component {
     const leaveRequestData = {
       name: auth.user.name,
       fromEmail: auth.user.email,
-      toEmail: data.approvedBy,
+      toEmail: auth.user.reportingManager,
       fromDate: data.fromDate,
       toDate: data.toDate,
       leaveType: data.leaveType,

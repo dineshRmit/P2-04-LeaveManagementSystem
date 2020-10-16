@@ -92,6 +92,7 @@ const ActivateAccountForm = (props) => {
           <Select.Option value="bloodDonorLeave">Blood donor leave</Select.Option>
           <Select.Option value="sickLeaveWC">Sick leave(certificate)</Select.Option>
           <Select.Option value="sickLeaveWOC">Sick leave(w/o certificate)</Select.Option>
+          <Select.Option value="parentalLeave">Parental leave</Select.Option>
           <Select.Option value="unpaidLeave">Unpaid leave</Select.Option>
         </Select>
       </Form.Item>
@@ -107,19 +108,6 @@ const ActivateAccountForm = (props) => {
         ]}
       >
         <Input placeholder="Enter leave information" style={{ width: "300px", marginLeft: "2.2em" }} />
-      </Form.Item>
-
-      <Form.Item
-        name="approvedBy"
-        label="Approved By"
-        rules={[
-          {
-            required: true,
-            message: "Please enter information",
-          },
-        ]}
-      >
-        <Input placeholder="Enter manager email" style={{ width: "285px" }} />
       </Form.Item>
 
       {clearForm ? clearFormData() : <div />}

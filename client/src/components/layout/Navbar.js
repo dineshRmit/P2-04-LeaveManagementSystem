@@ -149,6 +149,12 @@ class Navbar extends Component {
               <Link to="/manager/leave/manageLeaves"></Link>
             </Menu.Item>
           </SubMenu>
+          <SubMenu key="sub1" icon={<UserOutlined />} title="Staff">
+            <Menu.Item key="/manager/staff/viewAllStaff">
+              View all staff
+              <Link to="/manager/staff/viewAllStaff"></Link>
+            </Menu.Item>
+          </SubMenu>
         </Menu>
       </Sider>
     );

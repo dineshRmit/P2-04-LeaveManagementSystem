@@ -4,6 +4,8 @@ const bodyParser = require("body-parser");
 const passport = require("passport");
 const path = require("path");
 
+const cors = require("cors");
+
 const users = require("./routes/api/users");
 
 //Initialize express
@@ -28,6 +30,7 @@ mongoose
 
 // Passport middleware
 app.use(passport.initialize());
+app.use(cors());
 
 //Serve static assets of in production
 if (process.env.NODE_ENV === "production") {

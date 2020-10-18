@@ -17,7 +17,7 @@ const ErrorModal = (props) => {
       ]}
     >
       <p>
-        <WarningOutlined style={{ color: "red" }} twoToneColor="#eb2f96" /> Error in changing role
+        <WarningOutlined style={{ color: "red" }} twoToneColor="#eb2f96" /> Not a valid email
       </p>
     </Modal>
   );

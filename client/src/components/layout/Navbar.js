@@ -24,7 +24,7 @@ class Navbar extends Component {
   AdminRender = () => {
     return (
       <Sider trigger={null} collapsible collapsed={this.props.collapsed}>
-        <div className="logo" />
+        <div className="logo" style={{textAlign: "center", color: "white", fontSize: '1em', textTransform: 'uppercase'}}> {this.props.auth.user.userType1}</div>
         <Menu
           theme="dark"
           mode="inline"
@@ -75,7 +75,7 @@ class Navbar extends Component {
   StaffRender = () => {
     return (
       <Sider trigger={null} collapsible collapsed={this.props.collapsed}>
-        <div className="logo" />
+       <div className="logo" style={{textAlign: "center", color: "white", fontSize: '1em', textTransform: 'uppercase'}}> {this.props.auth.user.userType1}</div>
         <Menu
           theme="dark"
           mode="inline"
@@ -117,7 +117,7 @@ class Navbar extends Component {
   ManagerRender = () => {
     return (
       <Sider trigger={null} collapsible collapsed={this.props.collapsed}>
-        <div className="logo" />
+        <div className="logo" style={{textAlign: "center", color: "white", fontSize: '1em', textTransform: 'uppercase'}}> {this.props.auth.user.userType1}</div>
         <Menu
           theme="dark"
           mode="inline"
